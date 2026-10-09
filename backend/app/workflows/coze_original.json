@@ -1,0 +1,5938 @@
+{
+  "schema_version": "1.0.0",
+  "name": "huochairenzhongwenclark",
+  "id": 7598144972463177769,
+  "description": "彩色火柴人中文横屏",
+  "mode": "workflow",
+  "icon": "FileBizType.BIZ_BOT_WORKFLOW/1810275674110068_1763109249422894887_rqfU8tP8JE.png",
+  "nodes": [
+    {
+      "id": "180546",
+      "type": "llm",
+      "title": "AI生成口播稿",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-LLM-v2.jpg",
+      "description": "调用大语言模型,使用变量和提示词生成回复",
+      "version": "3",
+      "position": {
+        "x": 1100,
+        "y": 79.89999999999995
+      },
+      "parameters": {
+        "fcParamVar": {
+          "knowledgeFCParam": {}
+        },
+        "llmParam": [
+          {
+            "name": "generationDiversity",
+            "input": {
+              "type": "string",
+              "value": "default_val"
+            }
+          },
+          {
+            "name": "temperature",
+            "input": {
+              "type": "float",
+              "value": "0.3"
+            }
+          },
+          {
+            "name": "maxTokens",
+            "input": {
+              "type": "integer",
+              "value": "12288"
+            }
+          },
+          {
+            "name": "spCurrentTime",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "spAntiLeak",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "prefixCache",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "responseFormat",
+            "input": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "name": "modelName",
+            "input": {
+              "type": "string",
+              "value": "豆包·1.5·Pro·32k"
+            }
+          },
+          {
+            "name": "modelType",
+            "input": {
+              "type": "integer",
+              "value": "1737521813"
+            }
+          },
+          {
+            "name": "parameters",
+            "input": {
+              "type": "object",
+              "value": null
+            }
+          },
+          {
+            "name": "prompt",
+            "input": {
+              "type": "string",
+              "value": "{{subject}}"
+            }
+          },
+          {
+            "name": "enableChatHistory",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "chatHistoryRound",
+            "input": {
+              "type": "integer",
+              "value": "3"
+            }
+          },
+          {
+            "name": "systemPrompt",
+            "input": {
+              "type": "string",
+              "value": "你是一位资深的深度内容创作者与心理学观察家，拥有哲学家的思辨能力和作家的共情能力。你擅长将复杂的社会现象、心理学或哲学概念，转化为能够引发大众深刻共鸣，并提供认知价值的口播文案。你的语言风格沉静、理性而富有洞察力，从不使用说教口吻或廉价的感叹。\n\n# 任务 (Task)\n\n根据我提供的核心主题，严格遵循以下四段式“V形”叙事结构，创作一篇长度在400-600字之间的深度思考口播稿文案。\n\n# 核心结构与规则 (Core Structure & Rules)\n\n请务必按顺序遵循以下四个步骤，确保叙事逻辑的完整性：\n\n### 1. 情感共鸣切入 (The Hook: Emotional Resonance)\n   目标： 沉入谷底，精准捕捉一个普遍存在的、具体的负面情绪或生活困境。\n   执行： 用第二人称“你”直接对话，描绘一个具体的、令人不适的场景或心理状态。你的描述要足够精准，让观众立刻产生“是的，我就是这样”的代入感。避免宽泛的抱怨，要切入痛点。\n   反思问题： 我是否描绘了一个让目标受众无法回避的内心矛盾。\n\n### 2. 核心概念重塑 (The Pivot: Conceptual Reframing)\n   目标： 提出拐点，引入一个核心概念（可以源于心理学、哲学、社会学等）来解释第一步中描述的困境。\n   执行： 将观众的视角从混乱的个人情绪中抽离出来，提供一个全新的、更高维度的认知框架。这不是给出简单的答案，而是提供一种“原来如此”的解释。这个概念应该是文案的核心“干货”。\n   反思问题： 我提供的这个概念是否足够新颖或深刻，能够颠覆观众对问题的原有认知。\n\n### 3. 场景深化与内化 (The Deepening: Internalization through Scenarios)\n   目标： 将抽象概念具象化，引导观众进行自我对话和内化。\n   执行： 使用一个或多个生动的比喻、思想实验或具体的对比场景，来阐释第二步中的核心概念。例如，“就像饥饿的人会饥不择食”、“想象她们突然消失的模样”。这一步是为了让观众将理论与自身经验连接起来，完成从“知道”到“理解”的转化。\n   反思问题： 我的比喻或场景是否足够贴切，能否让观众在脑海中进行有效的“思维演练”。\n\n### 4. 升华结尾与指引 (The Uplift: Empowering Conclusion)\n   目标： 走出谷底，提供一个充满力量感、建设性的视角作为结尾，将选择权交还给观众。\n   执行： 总结观点，但重点在于赋予行动的意义或一种精神上的慰藉。结尾应该是开放性的、启发的，而非封闭的、命令式的。它要让观众感觉到，即使困境依然存在，但他们已经获得了新的工具或视角去面对它。\n   反思问题： 我的结尾是给予了廉价的希望，还是提供了一种在不确定性中依然可以前行的内在罗盘。\n\n# 限制 (Constraints)\n   杜绝说教感： 采用平等的、观察者式的口吻，多使用反问引导思考。\n   禁用感叹号： 保持文字的冷静与克制，让力量感从内容本身而非语气词中透出。\n   段落化呈现： 输出为连贯的段落，不使用列表、emoji或其他花哨格式。\n   认知深度优先： 避免使用陈词滥调和心灵鸡汤式的表达。\n\n# 示例 (Example)\n\n## 示例输入:\n斯多葛主义\n\n## 示例输出:\n为什么在这个焦虑的时代，斯多葛主义值得每一个人学习？每当爱人离去，或是意外来临，生活仿佛变成了充满不确定性的痛苦循环。我们不禁发问：我究竟为何而活？斯多葛主义指出：我们在想象中遭受的痛苦远大于现实。你要试着学会划清焦虑的界限，学会对不可控的事放手，对可控的事付出行动，用行动放下内心的焦虑。与此同时，我们还要在失去前学会珍惜。试着凝视爱人的脸庞，想象她们突然消失的模样。这个看似阴暗的练习实则蕴含光明。当我们在思想中提前经历失去，反而能挣脱对现状的麻木。最后做一名幸福的攀登者。真正的登山者不以登顶为唯一目的，攀登本身已是喜悦。在这个不确定的时代，我们要寻找那些即使失败也值得经历的旅程。斯多葛主义从不是消极认命，而是让人们清醒认识到：我们虽不能决定风向，但可以调整船帆。外界越是动荡，内在的罗盘越要指向美德与理性。正如奥勒所说：你无需等待焦虑审判，此刻你就能成为更好的人。\n\n## 示例输入:\n你要耐心等待，直到遇到对的人\n\n## 示例输出:\n“单身越久的人”。“就越会陷入一种既想找对象“。“又不想谈恋爱的心理”。他们害怕失去自由又不想陷入孤独，但他们不是真的找不到对象，哪怕身边的人都成双成对，他们依旧不为所动。但恰是这种状态让他们拥有了健康的单身观。你要等待那个真正合适的人，而不是望着周围人成双成对就随随便便开启一场恋爱。谁都明白单身时的痛苦会扭曲你的判断，就像饥饿的人会饥不择食。你终将明白一场糟糕的恋情远比孤独更加让人痛苦。单身时的孤独并不代表被世界抛弃，这恰恰印证了你审视了当下所有选项，然后明智地说：不。愿你不再被情感所伤害，终有一天你也会遇到属于你的那个人。\n\n\n## 示例输入:\n某天，你因一件小事大发脾气\n\n## 示例输出:\n明明只是一件小事，你却突然对朋友大发脾气。片刻过后，你陷入了自责与内疚。这可能不是因为你脾气差，而是你经历了太多伤痛与失望，逐渐学会了用愤怒来保护自己。有时即便你初衷良好，却难以心平气和地沟通，言语间似乎总带点刺骨的尖锐。面对陌生人，你温和有礼貌；面对家人朋友，你的态度却异常尖锐。若从心理学角度讲，你很可能患上了情感表达不能症。这类人难以健康地处理和表达情绪，情绪反应往往走向极端。这种行为往往根植于他们的成长经历，他们的尖刺里藏着未经治愈的伤，愤怒背后站着从未被温柔接待的自己。但请记住，你的情绪从不是一头凶猛的野兽，而是身体的求救信号。愿你不再用愤怒去保护内心的敏感与脆弱，而是学会拥抱自己的情绪，接纳那个情绪不稳定的自己。"
+            }
+          },
+          {
+            "name": "stableSystemPrompt",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "canContinue",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "loopPromptVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "loopPromptName",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "loopPromptId",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "subject",
+            "input": {
+              "type": "string",
+              "value": {
+                "path": "subject",
+                "ref_node": "100001"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "wenan": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "switch": false,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "138522",
+      "type": "condition",
+      "title": "是否输入自己的文案",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Condition-v2.jpg",
+      "description": "连接多个下游分支，若设定的条件成立则仅运行对应的分支，若均不成立则只运行“否则”分支",
+      "position": {
+        "x": 640,
+        "y": 198.94999999999993
+      },
+      "parameters": {
+        "branches": [
+          {
+            "condition": {
+              "conditions": [
+                {
+                  "left": {
+                    "input": {
+                      "type": "string",
+                      "value": {
+                        "path": "wenan",
+                        "ref_node": "100001"
+                      }
+                    }
+                  },
+                  "operator": 9
+                }
+              ],
+              "logic": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "139542",
+      "type": "variable_merge",
+      "title": "正文文案变量聚合",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/VariableMerge-icon.jpg",
+      "description": "对多个分支的输出进行聚合处理",
+      "position": {
+        "x": 2020,
+        "y": 210.79999999999993
+      },
+      "parameters": {
+        "mergeGroups": [
+          {
+            "name": "Group1",
+            "variables": [
+              {
+                "schema": {
+                  "type": "string"
+                },
+                "type": "list",
+                "value": {
+                  "content": {
+                    "blockID": "139031",
+                    "name": "segments",
+                    "source": "block-output"
+                  },
+                  "rawMeta": {
+                    "type": 99
+                  },
+                  "type": "ref"
+                }
+              },
+              {
+                "schema": {
+                  "type": "string"
+                },
+                "type": "list",
+                "value": {
+                  "content": {
+                    "blockID": "1773492",
+                    "name": "segments",
+                    "source": "block-output"
+                  },
+                  "rawMeta": {
+                    "type": 99
+                  },
+                  "type": "ref"
+                }
+              }
+            ]
+          }
+        ],
+        "node_outputs": {
+          "Group1": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          }
+        }
+      }
+    },
+    {
+      "id": "139031",
+      "type": "plugin",
+      "title": "口播稿智能分割text_splitter",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/5c26b04a903b4e01bec8123a42e96dd8~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "视频合成-速创猫小工具",
+      "position": {
+        "x": 1560,
+        "y": 329.69999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7497679985252073498"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "text_splitter"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7495336137377153039"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_速创小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "text",
+            "input": {
+              "type": "string",
+              "value": {
+                "path": "wenan",
+                "ref_node": "100001"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "error": {
+            "type": "string",
+            "required": true,
+            "value": null,
+            "description": "执行过程中出现的错误信息，正常时为空"
+          },
+          "segments": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "required": true,
+            "value": null,
+            "description": "断句并清洗后的文本数组"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1773492",
+      "type": "plugin",
+      "title": "AI口播稿智能分割text_splitter",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/5c26b04a903b4e01bec8123a42e96dd8~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "视频合成-速创猫小工具",
+      "position": {
+        "x": 1560,
+        "y": 93.89999999999995
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7497679985252073498"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "text_splitter"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7495336137377153039"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_速创小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "text",
+            "input": {
+              "value": {
+                "path": "wenan",
+                "ref_node": "180546"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "error": {
+            "type": "string",
+            "required": true,
+            "value": null,
+            "description": "执行过程中出现的错误信息，正常时为空"
+          },
+          "segments": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "required": true,
+            "value": null,
+            "description": "断句并清洗后的文本数组"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "136490",
+      "type": "plugin",
+      "title": "提取正文音频时间线audio_timelines",
+      "icon": "https://p3-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/0c873004bfd9408ea9c244af891d88ce~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "提取音频时间线-速创猫小工具",
+      "position": {
+        "x": 3400,
+        "y": 199.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7495338880829390888"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "audio_timelines"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7495336137377153039"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "audio_timelines"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "links",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "links",
+                "ref_node": "159936"
+              }
+            }
+          },
+          {
+            "name": "silence_duration",
+            "input": {
+              "type": "float",
+              "value": 0.15
+            }
+          },
+          {
+            "name": "trim_breath",
+            "input": {
+              "type": "integer",
+              "value": 1
+            }
+          }
+        ],
+        "node_outputs": {
+          "all_timelines": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "required": true,
+                  "value": null,
+                  "description": "最后一段音频的结束时间（单位：微秒）"
+                },
+                "start": {
+                  "type": "integer",
+                  "required": true,
+                  "value": null,
+                  "description": "第一段音频的开始时间（单位：微秒）"
+                }
+              },
+              "value": null
+            },
+            "required": true,
+            "value": null,
+            "description": "总时间线"
+          },
+          "error": {
+            "type": "string",
+            "value": null,
+            "description": "错误信息"
+          },
+          "links": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "required": true,
+            "value": null,
+            "description": "音频链接数组"
+          },
+          "timelines": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "required": true,
+                  "value": null,
+                  "description": "当前音频段的结束时间（单位：微秒）"
+                },
+                "start": {
+                  "type": "integer",
+                  "required": true,
+                  "value": null,
+                  "description": "当前音频段的开始时间（单位：微秒）"
+                }
+              },
+              "value": null
+            },
+            "required": true,
+            "value": null,
+            "description": "音频时间线数组"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "159936",
+      "type": "plugin",
+      "title": "提取正文语音URL为列表audio_link_collector",
+      "icon": "https://p3-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/d6e39e163e0a4271862bb94edd9b8593~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "视频合成-速创猫小工具",
+      "position": {
+        "x": 2940,
+        "y": 199.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7497679985252040730"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "audio_link_collector"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7495336137377153039"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_速创小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "outputList",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "float",
+                    "value": null
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "duration": {
+                        "type": "float",
+                        "value": null,
+                        "description": "音频时长，单位是s"
+                      },
+                      "link": {
+                        "type": "string",
+                        "value": null
+                      }
+                    },
+                    "value": null
+                  },
+                  "log_id": {
+                    "type": "string",
+                    "value": null
+                  },
+                  "msg": {
+                    "type": "string",
+                    "value": null
+                  }
+                },
+                "value": null
+              },
+              "value": {
+                "path": "outputList",
+                "ref_node": "122028"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "error": {
+            "type": "string",
+            "required": true,
+            "value": null,
+            "description": "错误信息；正常为空字符串"
+          },
+          "links": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "required": true,
+            "value": null,
+            "description": "提取出的链接数组"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "168591",
+      "type": "batch",
+      "title": "批量生成正文视频",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Batch-v2.jpg",
+      "description": "通过设定批量运行次数和逻辑，运行批处理体内的任务",
+      "position": {
+        "x": 6260,
+        "y": 449.6
+      },
+      "canvas_position": {
+        "x": 5160,
+        "y": 741.3999999999999
+      },
+      "parameters": {
+        "batchSize": {
+          "type": "integer",
+          "value": {
+            "content": 100,
+            "rawMeta": {
+              "type": 2
+            },
+            "type": "literal"
+          }
+        },
+        "concurrentSize": {
+          "type": "integer",
+          "value": {
+            "content": 3,
+            "rawMeta": {
+              "type": 2
+            },
+            "type": "literal"
+          }
+        },
+        "node_inputs": [
+          {
+            "name": "imgsTimeline",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "img_prompt": {
+                    "type": "string",
+                    "value": null
+                  },
+                  "video_prompt": {
+                    "type": "string",
+                    "value": null
+                  }
+                },
+                "value": null
+              },
+              "value": {
+                "path": "outputList",
+                "ref_node": "168059"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "data_list": {
+            "value": {
+              "type": "image",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "data",
+                "ref_node": "155753"
+              }
+            }
+          },
+          "video_url_list": {
+            "value": {
+              "type": "image",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "Group1",
+                "ref_node": "129292"
+              }
+            }
+          }
+        }
+      },
+      "nodes": [
+        {
+          "id": "155753",
+          "type": "image_generate",
+          "title": "图像生成",
+          "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-ImageGeneration-v2.jpg",
+          "description": "通过文字描述/添加参考图生成图片",
+          "position": {
+            "x": 180,
+            "y": 1.4210854715202004e-14
+          },
+          "parameters": {
+            "modelSetting": {
+              "custom_ratio": {
+                "height": 1080,
+                "ratio_type": "fixed",
+                "width": 1920
+              },
+              "ddim_steps": 40,
+              "max_images": 1,
+              "model": 10
+            },
+            "node_inputs": [
+              {
+                "name": "img_prompt",
+                "input": {
+                  "type": "string",
+                  "value": {
+                    "path": "imgsTimeline.img_prompt",
+                    "ref_node": "168591"
+                  }
+                }
+              }
+            ],
+            "node_outputs": {
+              "data": {
+                "type": "image",
+                "value": null
+              },
+              "msg": {
+                "type": "string",
+                "value": null
+              }
+            },
+            "prompt": {
+              "negative_prompt": "实心黑眼、空心眼、无白底、瞳孔过大、双层瞳孔、写实、3D、干净矢量、完美几何、渐变、照片质感、复杂背景、高饱和卡通、亮面高光眼。",
+              "prompt": "{{img_prompt}}，Head: Rounded oval head, white filling, large white space on the face, body structure: typical of stickmen, with a torso and limbs formed by slender black lines."
+            },
+            "references": [],
+            "settingOnError": {
+              "processType": 1,
+              "retryTimes": 0,
+              "timeoutMs": 60000
+            }
+          }
+        },
+        {
+          "id": "152234",
+          "type": "plugin",
+          "title": "sd_better_prompt",
+          "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-plugin-better_prompt-v2.jpg",
+          "description": "智能优化图像提示词",
+          "position": {
+            "x": 1100,
+            "y": 94.45000000000002
+          },
+          "parameters": {
+            "apiParam": [
+              {
+                "name": "apiID",
+                "input": {
+                  "type": "string",
+                  "value": "7439197952104726528"
+                }
+              },
+              {
+                "name": "apiName",
+                "input": {
+                  "type": "string",
+                  "value": "sd_better_prompt"
+                }
+              },
+              {
+                "name": "pluginID",
+                "input": {
+                  "type": "string",
+                  "value": "7439197952104710144"
+                }
+              },
+              {
+                "name": "pluginName",
+                "input": {
+                  "type": "string",
+                  "value": "提示词优化"
+                }
+              },
+              {
+                "name": "pluginVersion",
+                "input": {
+                  "type": "string",
+                  "value": ""
+                }
+              },
+              {
+                "name": "tips",
+                "input": {
+                  "type": "string",
+                  "value": ""
+                }
+              },
+              {
+                "name": "outDocLink",
+                "input": {
+                  "type": "string",
+                  "value": ""
+                }
+              }
+            ],
+            "node_inputs": [
+              {
+                "name": "prompt",
+                "input": {
+                  "type": "string",
+                  "value": {
+                    "path": "imgsTimeline.img_prompt",
+                    "ref_node": "168591"
+                  }
+                }
+              }
+            ],
+            "node_outputs": {
+              "data": {
+                "type": "string",
+                "value": null
+              },
+              "msg": {
+                "type": "string",
+                "value": null
+              }
+            },
+            "settingOnError": {
+              "processType": 1,
+              "retryTimes": 0,
+              "timeoutMs": 180000
+            }
+          }
+        },
+        {
+          "id": "192618",
+          "type": "condition",
+          "title": "选择器",
+          "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Condition-v2.jpg",
+          "description": "连接多个下游分支，若设定的条件成立则仅运行对应的分支，若均不成立则只运行“否则”分支",
+          "position": {
+            "x": 640,
+            "y": 13.15000000000002
+          },
+          "parameters": {
+            "branches": [
+              {
+                "condition": {
+                  "conditions": [
+                    {
+                      "left": {
+                        "input": {
+                          "value": {
+                            "path": "data",
+                            "ref_node": "155753"
+                          }
+                        }
+                      },
+                      "operator": 10
+                    }
+                  ],
+                  "logic": 2
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "129292",
+          "type": "variable_merge",
+          "title": "变量聚合",
+          "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/VariableMerge-icon.jpg",
+          "description": "对多个分支的输出进行聚合处理",
+          "position": {
+            "x": 2063.6722298488435,
+            "y": 13.150000000000002
+          },
+          "parameters": {
+            "mergeGroups": [
+              {
+                "name": "Group1",
+                "variables": [
+                  {
+                    "assistType": 2,
+                    "type": "string",
+                    "value": {
+                      "content": {
+                        "blockID": "155753",
+                        "name": "data",
+                        "source": "block-output"
+                      },
+                      "rawMeta": {
+                        "type": 7
+                      },
+                      "type": "ref"
+                    }
+                  },
+                  {
+                    "assistType": 2,
+                    "type": "string",
+                    "value": {
+                      "content": {
+                        "blockID": "1175150",
+                        "name": "data",
+                        "source": "block-output"
+                      },
+                      "rawMeta": {
+                        "type": 7
+                      },
+                      "type": "ref"
+                    }
+                  }
+                ]
+              }
+            ],
+            "node_outputs": {
+              "Group1": {
+                "type": "image",
+                "value": null
+              }
+            }
+          }
+        },
+        {
+          "id": "1175150",
+          "type": "image_generate",
+          "title": "图像生成_1",
+          "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-ImageGeneration-v2.jpg",
+          "description": "通过文字描述/添加参考图生成图片",
+          "position": {
+            "x": 1560,
+            "y": 68.45000000000002
+          },
+          "parameters": {
+            "modelSetting": {
+              "custom_ratio": {
+                "height": 1080,
+                "ratio_type": "fixed",
+                "width": 1920
+              },
+              "ddim_steps": 40,
+              "max_images": 1,
+              "model": 10
+            },
+            "node_inputs": [
+              {
+                "name": "img_prompt",
+                "input": {
+                  "value": {
+                    "path": "data",
+                    "ref_node": "152234"
+                  }
+                }
+              }
+            ],
+            "node_outputs": {
+              "data": {
+                "type": "image",
+                "value": null
+              },
+              "msg": {
+                "type": "string",
+                "value": null
+              }
+            },
+            "prompt": {
+              "negative_prompt": "实心黑眼、空心眼、无白底、瞳孔过大、双层瞳孔、写实、3D、干净矢量、完美几何、渐变、照片质感、复杂背景、高饱和卡通、亮面高光眼。",
+              "prompt": "{{img_prompt}}，Head: Rounded oval head, white filling, large white space on the face, body structure: typical of stickmen, with a torso and limbs formed by slender black lines."
+            },
+            "references": [],
+            "settingOnError": {
+              "processType": 1,
+              "retryTimes": 0,
+              "timeoutMs": 60000
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source_node": "168591",
+          "target_node": "155753",
+          "source_port": "batch-function-inline-output"
+        },
+        {
+          "source_node": "155753",
+          "target_node": "192618"
+        },
+        {
+          "source_node": "192618",
+          "target_node": "152234",
+          "source_port": "false"
+        },
+        {
+          "source_node": "152234",
+          "target_node": "1175150"
+        },
+        {
+          "source_node": "192618",
+          "target_node": "129292",
+          "source_port": "true"
+        },
+        {
+          "source_node": "1175150",
+          "target_node": "129292"
+        },
+        {
+          "source_node": "129292",
+          "target_node": "168591",
+          "target_port": "batch-function-inline-input"
+        }
+      ]
+    },
+    {
+      "id": "121063",
+      "type": "plugin",
+      "title": "文案合并时间线wenan_timeline_range_merge",
+      "icon": "https://p6-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/d6e39e163e0a4271862bb94edd9b8593~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "视频合成-速创猫小工具",
+      "position": {
+        "x": 3860,
+        "y": 437.6
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7497679985252089882"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "wenan_timeline_range_merge"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7495336137377153039"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_速创小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "136490"
+              }
+            }
+          },
+          {
+            "name": "wenan",
+            "input": {
+              "value": {
+                "path": "Group1",
+                "ref_node": "139542"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "error": {
+            "type": "string",
+            "value": null,
+            "description": "错误信息字符串，正常时为空字符串"
+          },
+          "wenanTimeline": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "required": true,
+                  "value": null,
+                  "description": "文案"
+                },
+                "end": {
+                  "type": "float",
+                  "required": true,
+                  "value": null,
+                  "description": "文案结束时间"
+                },
+                "start": {
+                  "type": "float",
+                  "required": true,
+                  "value": null,
+                  "description": "文案开始时间"
+                }
+              },
+              "value": null
+            },
+            "required": true,
+            "value": null,
+            "description": "合并后的文案时间线数组，每个元素包含content、start和end"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "168059",
+      "type": "llm",
+      "title": "生成配图/视频提示词",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-LLM-v2.jpg",
+      "description": "调用大语言模型,使用变量和提示词生成回复",
+      "version": "3",
+      "position": {
+        "x": 4780,
+        "y": 423.6
+      },
+      "parameters": {
+        "batch": {
+          "batchEnable": true,
+          "batchSize": 100,
+          "concurrentSize": 10,
+          "inputLists": [
+            {
+              "name": "item1",
+              "input": {
+                "type": "list",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "end": {
+                      "type": "float",
+                      "value": null
+                    },
+                    "merged_content": {
+                      "type": "string",
+                      "value": null
+                    },
+                    "shot_id": {
+                      "type": "string",
+                      "value": null
+                    },
+                    "start": {
+                      "type": "float",
+                      "value": null
+                    }
+                  },
+                  "value": null
+                },
+                "value": {
+                  "path": "sceneTimeline",
+                  "ref_node": "117064"
+                }
+              }
+            }
+          ]
+        },
+        "fcParamVar": {
+          "knowledgeFCParam": {}
+        },
+        "llmParam": [
+          {
+            "name": "generationDiversity",
+            "input": {
+              "type": "string",
+              "value": "default_val"
+            }
+          },
+          {
+            "name": "temperature",
+            "input": {
+              "type": "float",
+              "value": "0.8"
+            }
+          },
+          {
+            "name": "maxTokens",
+            "input": {
+              "type": "integer",
+              "value": "12288"
+            }
+          },
+          {
+            "name": "spCurrentTime",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "spAntiLeak",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "prefixCache",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "responseFormat",
+            "input": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "name": "modelType",
+            "input": {
+              "type": "integer",
+              "value": "1737521813"
+            }
+          },
+          {
+            "name": "modelName",
+            "input": {
+              "type": "string",
+              "value": "豆包·1.5·Pro·32k"
+            }
+          },
+          {
+            "name": "parameters",
+            "input": {
+              "type": "object",
+              "value": null
+            }
+          },
+          {
+            "name": "prompt",
+            "input": {
+              "type": "string",
+              "value": "sceneTimeline: {{content}}"
+            }
+          },
+          {
+            "name": "enableChatHistory",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "chatHistoryRound",
+            "input": {
+              "type": "integer",
+              "value": "3"
+            }
+          },
+          {
+            "name": "systemPrompt",
+            "input": {
+              "type": "string",
+              "value": "You are an Emotional Visual Script Engineer, specialized in compressing **single scene descriptions** into prompts that can be directly fed to image generation models (img_prompt) and light animation models (video_prompt).\n\nThis version focuses on:\n- **Art Style**: Clean hand-drawn stick figures, soft watercolor texture, neat strokes, fresh background colors, moderate white space\n- **Supporting Characters System**: Simplified human silhouettes, soft gray tones, rounded edges, simple expressions allowed\n- **video_prompt**: 5-second natural movements matching the emotion + subtle camera movements\n\n---\n\n## Input Format\n\n```json\n{\n  \"content\": \"Scene description text\"\n}\n\nOutput Format\njson\n{\n  \"img_prompt\": \"Scene subject + Expression/Posture + Supporting characters + Environment elements + Color palette/Composition + Style anchor\",\n  \"video_prompt\": \"5-second scene: Subject <action>, Supporting characters <subtle interaction>, Camera <slight movement>, Smooth transition\"\n}\n\nimg_prompt Writing Guidelines (Fixed Order)\n1. Scene Subject Declaration (25%)\n<Time/Scene>, black line stick figure <action/position>\n\nMain Character Features:\n\nUniform black line drawing\nRound head, simple limbs\nExpression using simple black dots or curved lines\nClean edges, smooth strokes\n2. Expression and Posture (15%)\nawk\nExpression <curious/thinking/smiling/surprised/calm/confused/focused>, Posture <standing/sitting/walking/raising hand/nodding>\n\n3. Supporting Characters Description (15%)\nSupporting characters <quantity, position, appearance features, interaction relationship>\n\nSupporting Characters Visual Rules\nBasic Form:\n\nSimplified human silhouettes, soft gray tone rendering\nCan have simple black dot eyes or curved line expressions\nRounded and clean edges\nSimilar size to main character or slightly smaller\nSupporting Character Types and Features:\n\nCharacter Type\tAppearance Description\tTypical Scenes\nInteractive Objects/Groups\t2-4 light gray human silhouettes, same scene as main character, can have simple expressions, clear edges\tSocial scenes, communication demos, group interactions\nConversation Partner\tSingle light gray human figure, positioned near main character, clear outline, simple black dot eyes and curved mouth\tDialogue, counseling, listening, communication\nPsychological Concept Avatar\tSingle or multiple colored outlines (matching concept colors), soft edges, can have symbol markers\tEmotion personification, psychological concept visualization\nThoughts/Ideas\tSemi-transparent light-colored outline, positioned above or beside main character's head, with thought bubble effect\tThinking process, inner thoughts, cognitive demonstration\nSupporters/Companions\tLight gray or warm gray outline, soft edges, positioned beside main character\tSupport, companionship, team, family\nSupporting Character Position Rules:\n\nInteractive objects: Same horizontal level as main character, natural distribution\nConversation partner: Facing main character, moderate distance\nConcept avatar: Any position based on concept needs\nThoughts/Ideas: Above or to the upper side of main character's head\nSupporters/Companions: Beside or behind main character\nSupporting Character Quantity Control:\n\nOne-on-one scene: 1 supporting character\nSmall group scene: 2-4 supporting characters\nGroup concept: 4-6 supporting characters\nKeep the composition clean and readable\n4. Environment and Elements (15%)\nBackground <auto-match color tone and texture based on scene/theme>, Elements <simple object shapes>\n\nTheme-Background Color Auto-Match Table\nTheme Type\tBackground Color\tBackground Texture Description\nCognition/Thinking/Learning\tLight blue/Sky blue\tSoft light blue flat wash, clean and fresh, moderate white space, rational and calm feeling\nEmotion/Feeling/Empathy\tLight orange/Warm apricot\tSoft warm orange brush strokes, warm and approachable, soft edge transitions\nStress/Challenge/Problem\tLight gray-blue/Neutral gray\tLight gray-blue base, slight texture, not oppressive but with weight\nGrowth/Change/Breakthrough\tLight green/Mint green\tFresh light green base, vibrant feeling, light brush strokes\nRelationship/Communication/Connection\tLight purple/Lavender\tSoft lavender base, gentle and inclusive feeling, soft edges\nCalm/Relaxation/Healing\tCream white/Ivory\tWarm cream base, large white space, soft and comfortable, paper texture\nMotivation/Goals/Action\tLight yellow/Lemon yellow\tBright light yellow base, positive and upward, clean and crisp\nSelf/Introspection/Awareness\tLight gray-purple/Dusty pink\tSoft gray-purple base, reserved and quiet, moderate white space\nUsage Rules:\n\nExtract theme keywords from the description\nAuto-match corresponding background color and texture description\nMaintain clean and fresh educational style\n5. Color Palette and Composition (15%)\nColor palette <Primary color [theme background color], Secondary color light gray/white, Black outline>, Composition <adjust subject position and white space ratio based on content>\n\nScene-Composition Auto-Match\nScene Type\tComposition Suggestion\nConcept Explanation\tSubject centered, even white space 40-50%, balanced and clear\nComparison Display\tLeft-right distribution, subject and comparison elements on each side\nProcess Demonstration\tSubject on left, right side reserved for arrows/process elements\nEmotion Display\tSubject centered slightly lower, upper white space for expression close-up\nInteractive Scene\tMultiple characters evenly distributed, maintain visual balance\nFocus Close-up\tSubject centered and enlarged, 30% white space, emphasize key points\nGroup Scene\tSubject and supporting characters in triangle or arc arrangement, full composition\n6. Style Anchor (15%, Completely Fixed)\nsmali\nClean hand-drawn stick figure illustration, stick figure composed of uniform black lines, large head small body, eyes are solid small black dots or hollow circles, simple curved lines for expressions, body has no fill and is clean and simple, soft watercolor texture, smooth natural brush strokes, clean rounded edges, fresh and bright colors, high contrast and easy to read, light paper texture, moderate white space, educational illustration style, no complex details or realistic elements\n\nNote: Style anchor content is completely fixed and does not change based on scene.\n\nvideo_prompt Writing Guidelines\n5-second scene: Subject <action>, Supporting characters <interaction action>, Camera <slight movement>, Smooth transition\n\nMain Character Action Examples\nCognition/Thinking:\n\nThinking: Hand on chin, head slightly tilted, eyes looking up\nRealization: Head slightly back, hands open, eyes widened\nConfused: Head gently shaking left-right, hands spread open, eyebrows slightly furrowed\nFocused: Body leaning forward, eyes looking straight ahead, staying still\nEmotion/Feeling:\n\nHappy: Hands raised, body slightly jumping, corners of mouth raised\nCalm: Deep breathing chest movement, shoulders relaxed, expression at ease\nNervous: Body slightly contracted, fists clenched, shoulders raised\nRelieved: Hands slowly lowered, shoulders dropped, deep breath\nInteraction/Action:\n\nListening: Head slightly tilted, body facing the other person, nodding\nExpressing: One or both hands gesturing rhythmically, body leaning forward\nAccepting: Hands extended in receiving gesture, nodding with smile\nDeclining: Hands gently waving, head slightly shaking\nPresentation/Explanation:\n\nPointing: One hand pointing to one side, body turning toward indicated direction\nPresenting: Both hands extended forward, presenting gesture\nComparing: Hands pointing to both sides separately, alternating left-right\nSummarizing: Hands coming together, nodding\nSupporting Character Interaction Action Examples\nConversation Partner:\n\nNodding in response, body slightly leaning forward\nGestures accompanying speech, expression changes\nInteractive Group:\n\nSynchronized nodding, sequential reactions\nMaintaining listening posture, occasionally looking at each other\nConcept Avatar:\n\nSlowly appearing/disappearing, position shifting\nSize changes, color gradients\nThoughts/Ideas:\n\nBubble emerging, text/symbols appearing\nFading in and out, position drifting\nCamera Movement Examples\nSlight push in 1-2% (emphasize key points)\nSlight pan 2% (follow action)\nStay still (stable viewing)\nSlight pull back 1.5% (show full scene)\nComplete Examples\nExample 1: Cognitive Concept Explanation\nInput\n\njson\n{\n  \"content\": \"The brain activates fight or flight response when facing stress\"\n}\n\nOutput\n\njson\n{\n  \"img_prompt\": \"Abstract scene, black line stick figure standing centered, simplified brain icon above head. Expression focused with slightly furrowed brows, posture standing with fists clenched in defensive stance. Two colored concept avatars on left and right: red silhouette in attacking pose representing FIGHT on left, blue silhouette in running pose representing FLIGHT on right. Background light gray-blue base with slight texture, clean and neat, elements simple with only brain icon and arrow indicators. Color palette light gray-blue, red, blue, black outline, composition subject centered, concept avatars symmetrically distributed on both sides, 40% white space. Clean hand-drawn stick figure illustration, stick figure composed of uniform black lines, large head small body, eyes are solid small black dots or hollow circles, simple curved lines for expressions, body has no fill and is clean and simple, soft watercolor texture, smooth natural brush strokes, clean rounded edges, fresh and bright colors, high contrast and easy to read, light paper texture, moderate white space, educational illustration style, no complex details or realistic elements\",\n  \"video_prompt\": \"5-second scene: Subject body slightly tensing, fists clenching, Supporting characters left red silhouette lunging forward, right blue silhouette running backward, Camera stays still, Smooth transition\"\n}\n\nExample 2: Emotion Recognition Scene\nInput\n\njson\n{\n  \"content\": \"Learning to recognize your own emotions is the first step of emotional intelligence\"\n}\n\nOutput\n\njson\n{\n  \"img_prompt\": \"Simple space, black line stick figure standing, one hand on chin thinking, other hand pointing to the side. Expression curious and focused, posture standing slightly turned. Three colored emotion avatars arranged on right side of main character: yellow silhouette with smile representing JOY, blue silhouette with downturned mouth representing SADNESS, red silhouette with frown representing ANGER, all simplified human forms. Background warm light orange soft brush strokes, warm and approachable, elements simple. Color palette light orange, yellow, blue, red, black outline, composition subject on left, right side displaying 3 emotion avatars, 35% white space. Clean hand-drawn stick figure illustration, stick figure composed of uniform black lines, large head small body, eyes are solid small black dots or hollow circles, simple curved lines for expressions, body has no fill and is clean and simple, soft watercolor texture, smooth natural brush strokes, clean rounded edges, fresh and bright colors, high contrast and easy to read, light paper texture, moderate white space, educational illustration style, no complex details or realistic elements\",\n  \"video_prompt\": \"5-second scene: Subject finger pointing at each of 3 emotion avatars in sequence, head slightly turning, Supporting characters 3 colored silhouettes bouncing and highlighting in sequence, Camera slight pan right 2%, Smooth flowing transition\"\n}\n\nExample 3: Communication Skills Demonstration\nInput\n\njson\n{\n  \"content\": \"Maintain eye contact while listening to make the other person feel valued\"\n}\n\nOutput\n\njson\n{\n  \"img_prompt\": \"Simple indoor setting, two stick figures standing face to face. Left side black line main character with focused warm expression, body slightly leaning forward, head tilted in listening posture. Right side light gray supporting character with clear outline, simple expression, hands gesturing while speaking. Dashed line connecting eye positions between them, emphasizing eye contact. Background soft lavender base, gentle and inclusive, minimal elements. Color palette light purple, light gray, black, composition two figures centered symmetrically, main character slightly prominent, 40% white space. Clean hand-drawn stick figure illustration, stick figure composed of uniform black lines, large head small body, eyes are solid small black dots or hollow circles, simple curved lines for expressions, body has no fill and is clean and simple, soft watercolor texture, smooth natural brush strokes, clean rounded edges, fresh and bright colors, high contrast and easy to read, light paper texture, moderate white space, educational illustration style, no complex details or realistic elements\",\n  \"video_prompt\": \"5-second scene: Subject maintaining listening posture, occasionally nodding gently, Supporting character gesturing while speaking, body swaying rhythmically, Camera stays still, Warm smooth transition\"\n}\n\nExample 4: Psychological Growth Process\nInput\n\njson\n{\n  \"content\": \"Stepping out of your comfort zone feels uncomfortable, but it's the beginning of growth\"\n}\n\nOutput\n\njson\n{\n  \"img_prompt\": \"Abstract scene, black line stick figure standing at the edge of circular area on left side of frame, one foot already stepping out. Expression slightly nervous but determined, posture stepping forward, hands slightly open for balance. Left circular area filled with light gray representing COMFORT ZONE with text label, right open space in mint green representing GROWTH ZONE. No supporting characters, using area contrast to express concept. Background fresh light green base, vibrant feeling, large white space on right. Color palette light green, light gray, black, composition subject on left at transition point, right side white space over 50% symbolizing possibilities. Clean hand-drawn stick figure illustration, stick figure composed of uniform black lines, large head small body, eyes are solid small black dots or hollow circles, simple curved lines for expressions, body has no fill and is clean and simple, soft watercolor texture, smooth natural brush strokes, clean rounded edges, fresh and bright colors, high contrast and easy to read, light paper texture, moderate white space, educational illustration style, no complex details or realistic elements\",\n  \"video_prompt\": \"5-second scene: Subject slowly taking one step, body weight shifting forward, hands gradually relaxing and opening, No supporting characters, Camera slight push in 1.5% focusing on stepping action, Steady smooth transition\"\n}\n\nExample 5: Self-Awareness Practice\nInput\n\njson\n{\n  \"content\": \"Spend 5 minutes each day asking yourself: How am I feeling right now?\"\n}\n\nOutput\n\njson\n{\n  \"img_prompt\": \"Simple space, black line stick figure sitting cross-legged centered, hands resting on knees. Expression calm and introspective, eyes slightly closed, posture relaxed and upright. Supporting character is a thought bubble above main character's head, containing question mark and simplified heart symbol with text HOW DO I FEEL, semi-transparent light color, soft edges. Background soft dusty pink gray-purple base, reserved and quiet, large white space. Color palette light gray-purple, light pink, black, composition subject centered slightly lower, upper space reserved for thought bubble, over 50% white space. Clean hand-drawn stick figure illustration, stick figure composed of uniform black lines, large head small body, eyes are solid small black dots or hollow circles, simple curved lines for expressions, body has no fill and is clean and simple, soft watercolor texture, smooth natural brush strokes, clean rounded edges, fresh and bright colors, high contrast and easy to read, light paper texture, moderate white space, educational illustration style, no complex details or realistic elements\",\n  \"video_prompt\": \"5-second scene: Subject maintaining seated position, chest subtly rising and falling with breath, Supporting character thought bubble slowly emerging, question mark gently bouncing, Camera stays still, Soft gentle transition\"\n}\n\nExample 6: Building Positive Mindset\nInput\n\njson\n{\n  \"content\": \"Change 'I can't do it' to 'I am learning', and your mindset will be different\"\n}\n\nOutput\n\njson\n{\n  \"img_prompt\": \"Simple space, black line stick figure standing centered, hands in comparison presenting gesture. Expression transitioning from confused to smiling, posture standing, left hand pointing left, right hand pointing right. Left side has crossed-out speech bubble with X symbol and text I CAN'T representing negative thought, right side has checkmark speech bubble with text I AM LEARNING representing positive thought. Background left side light gray, right side light yellow forming contrast gradient, bright and positive. Color palette light gray, light yellow, black, red X, green checkmark, composition subject centered, left-right comparison elements evenly distributed, 35% white space. Clean hand-drawn stick figure illustration, stick figure composed of uniform black lines, large head small body, eyes are solid small black dots or hollow circles, simple curved lines for expressions, body has no fill and is clean and simple, soft watercolor texture, smooth natural brush strokes, clean rounded edges, fresh and bright colors, high contrast and easy to read, light paper texture, moderate white space, educational illustration style, no complex details or realistic elements\",\n  \"video_prompt\": \"5-second scene: Subject first looking left and shaking head, then turning right and nodding with smile, Left bubble fading out while right bubble highlights and enlarges, Camera stays still, Bright upbeat transition\"\n}\n\n"
+            }
+          },
+          {
+            "name": "stableSystemPrompt",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "canContinue",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "loopPromptVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "loopPromptName",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "loopPromptId",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "content",
+            "input": {
+              "type": "string",
+              "value": {
+                "path": "item1.merged_content",
+                "ref_node": "168059"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "outputList": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "img_prompt": {
+                  "type": "string",
+                  "value": null
+                },
+                "video_prompt": {
+                  "type": "string",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "switch": false,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "186545",
+      "type": "plugin",
+      "title": "create_draft创建剪映草稿",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "插件入口-创建草稿 https://c1ga2vmd0f1.feishu.cn/wiki/USGLw1REiijpQ7kh0fVcUBAUn3e",
+      "position": {
+        "x": 7740,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599197535354918"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "create_draft"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "required": true,
+            "value": null,
+            "description": "草稿文件访问链接"
+          },
+          "error": {
+            "type": "string",
+            "value": null,
+            "description": "错误信息，正常时为空字符串"
+          },
+          "tip_url": {
+            "type": "string",
+            "required": true,
+            "value": null,
+            "description": "提示信息链接"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1041638",
+      "type": "text",
+      "title": "上传背景音乐BGM",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-StrConcat-v2.jpg",
+      "description": "用于处理多个字符串类型变量的格式",
+      "position": {
+        "x": 4780,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "concatParams": [
+          {
+            "name": "concatResult",
+            "input": {
+              "type": "string",
+              "value": "{{String1}}"
+            }
+          },
+          {
+            "name": "arrayItemConcatChar",
+            "input": {
+              "type": "string",
+              "value": "，"
+            }
+          },
+          {
+            "name": "allArrayItemConcatChars",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "value": null
+              },
+              "value": [
+                {
+                  "isDefault": true,
+                  "label": "换行",
+                  "value": "\n"
+                },
+                {
+                  "isDefault": true,
+                  "label": "制表符",
+                  "value": "\t"
+                },
+                {
+                  "isDefault": true,
+                  "label": "句号",
+                  "value": "。"
+                },
+                {
+                  "isDefault": true,
+                  "label": "逗号",
+                  "value": "，"
+                },
+                {
+                  "isDefault": true,
+                  "label": "分号",
+                  "value": "；"
+                },
+                {
+                  "isDefault": true,
+                  "label": "空格",
+                  "value": " "
+                }
+              ]
+            }
+          }
+        ],
+        "method": "concat",
+        "node_inputs": [
+          {
+            "name": "String1",
+            "input": {
+              "type": "audio",
+              "value": "https://p9-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/726db00d153d4d7fb9df47958775a7c8.MP3~tplv-mdko3gqilj-image.image"
+            }
+          }
+        ],
+        "node_outputs": {
+          "output": {
+            "type": "string",
+            "required": true,
+            "value": null
+          }
+        }
+      }
+    },
+    {
+      "id": "137655",
+      "type": "plugin",
+      "title": "media_tile背景音乐铺满时间线",
+      "icon": "https://p6-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/40671e72b2974739b5e518cad1b21b93~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "音视频/图片平铺-速创小助手",
+      "position": {
+        "x": 6260,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7534298299793227817"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "media_tile"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7495336137377153039"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_速创小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "all_timeline",
+            "input": {
+              "value": {
+                "path": "all_timelines",
+                "ref_node": "136490"
+              }
+            }
+          },
+          {
+            "name": "media_url",
+            "input": {
+              "value": {
+                "path": "output",
+                "ref_node": "1041638"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "timelines": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "value": null
+                },
+                "start": {
+                  "type": "integer",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "urls": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "145750",
+      "type": "plugin",
+      "title": "add_audios添加背景音乐",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加音频 https://c1ga2vmd0f1.feishu.cn/wiki/P1FOwskIAiRUxWk2PDncnwnGnje",
+      "position": {
+        "x": 8660,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976375817"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_audios"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "186545"
+              }
+            }
+          },
+          {
+            "name": "mp3_urls",
+            "input": {
+              "value": {
+                "path": "urls",
+                "ref_node": "137655"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "137655"
+              }
+            }
+          },
+          {
+            "name": "volume",
+            "input": {
+              "type": "float",
+              "value": 0.3
+            }
+          }
+        ],
+        "node_outputs": {
+          "audio_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null,
+            "description": "音频ID列表"
+          },
+          "draft_url": {
+            "type": "string",
+            "value": null,
+            "description": "剪映草稿链接"
+          },
+          "error": {
+            "type": "string",
+            "value": null,
+            "description": "错误信息，正常时为空"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "154178",
+      "type": "text",
+      "title": "鼠标点击音效",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-StrConcat-v2.jpg",
+      "description": "用于处理多个字符串类型变量的格式",
+      "position": {
+        "x": 4780,
+        "y": -2.1316282072803006e-14
+      },
+      "parameters": {
+        "concatParams": [
+          {
+            "name": "concatResult",
+            "input": {
+              "type": "string",
+              "value": "{{String1}}"
+            }
+          },
+          {
+            "name": "arrayItemConcatChar",
+            "input": {
+              "type": "string",
+              "value": "，"
+            }
+          },
+          {
+            "name": "allArrayItemConcatChars",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "value": null
+              },
+              "value": [
+                {
+                  "isDefault": true,
+                  "label": "换行",
+                  "value": "\n"
+                },
+                {
+                  "isDefault": true,
+                  "label": "制表符",
+                  "value": "\t"
+                },
+                {
+                  "isDefault": true,
+                  "label": "句号",
+                  "value": "。"
+                },
+                {
+                  "isDefault": true,
+                  "label": "逗号",
+                  "value": "，"
+                },
+                {
+                  "isDefault": true,
+                  "label": "分号",
+                  "value": "；"
+                },
+                {
+                  "isDefault": true,
+                  "label": "空格",
+                  "value": " "
+                }
+              ]
+            }
+          }
+        ],
+        "method": "concat",
+        "node_inputs": [
+          {
+            "name": "String1",
+            "input": {
+              "type": "audio",
+              "value": "https://p3-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/33545bb4372e4234ae1136f3800b866e.MP3~tplv-mdko3gqilj-image.image"
+            }
+          }
+        ],
+        "node_outputs": {
+          "output": {
+            "type": "string",
+            "required": true,
+            "value": null
+          }
+        }
+      }
+    },
+    {
+      "id": "1466353",
+      "type": "plugin",
+      "title": "add_audios添加鼠标点击音效",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加音频 https://c1ga2vmd0f1.feishu.cn/wiki/P1FOwskIAiRUxWk2PDncnwnGnje",
+      "position": {
+        "x": 10040,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976375817"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_audios"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "186545"
+              }
+            }
+          },
+          {
+            "name": "mp3_urls",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "urls",
+                "ref_node": "1909183"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "end": {
+                    "type": "integer",
+                    "value": null
+                  },
+                  "start": {
+                    "type": "integer",
+                    "value": null
+                  }
+                },
+                "value": null
+              },
+              "value": {
+                "path": "timelines",
+                "ref_node": "1909183"
+              }
+            }
+          },
+          {
+            "name": "volume",
+            "input": {
+              "type": "float",
+              "value": 3
+            }
+          }
+        ],
+        "node_outputs": {
+          "audio_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null,
+            "description": "音频ID列表"
+          },
+          "draft_url": {
+            "type": "string",
+            "value": null,
+            "description": "剪映草稿链接"
+          },
+          "error": {
+            "type": "string",
+            "value": null,
+            "description": "错误信息，正常时为空"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1909183",
+      "type": "plugin",
+      "title": "media_tile鼠标点击音效",
+      "icon": "https://p6-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/40671e72b2974739b5e518cad1b21b93~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "音视频/图片平铺-速创小助手",
+      "position": {
+        "x": 6260,
+        "y": -2.1316282072803006e-14
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7534298299793227817"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "media_tile"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7495336137377153039"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_速创小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "all_timeline",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "value": null
+              },
+              "value": "[{\"start\": 0, \"end\": 391833}]"
+            }
+          },
+          {
+            "name": "media_url",
+            "input": {
+              "value": {
+                "path": "output",
+                "ref_node": "154178"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "timelines": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "value": null
+                },
+                "start": {
+                  "type": "integer",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "urls": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "125474",
+      "type": "plugin",
+      "title": "add_images添加正文配图",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加图片 https://c1ga2vmd0f1.feishu.cn/wiki/AykiwVtQai0UEnkD1wJcc28injg",
+      "position": {
+        "x": 11880,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599197535305766"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_images"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "186545"
+              }
+            }
+          },
+          {
+            "name": "imgs",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "data_list",
+                "ref_node": "168591"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "end": {
+                    "type": "float",
+                    "value": null
+                  },
+                  "merged_content": {
+                    "type": "string",
+                    "value": null
+                  },
+                  "shot_id": {
+                    "type": "string",
+                    "value": null
+                  },
+                  "start": {
+                    "type": "float",
+                    "value": null
+                  }
+                },
+                "value": null
+              },
+              "value": {
+                "path": "sceneTimeline",
+                "ref_node": "117064"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "error": {
+            "type": "string",
+            "value": null
+          },
+          "image_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_infos": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "value": null
+                },
+                "id": {
+                  "type": "string",
+                  "value": null
+                },
+                "start": {
+                  "type": "integer",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "138196",
+      "type": "plugin",
+      "title": "add_captions添加正文字幕",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加字幕 https://c1ga2vmd0f1.feishu.cn/wiki/Bk5OwR2toiaV0JkffBZca6yOnuf",
+      "position": {
+        "x": 17400,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599197535272998"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_captions"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "186545"
+              }
+            }
+          },
+          {
+            "name": "border_color",
+            "input": {
+              "type": "string",
+              "value": "#000000"
+            }
+          },
+          {
+            "name": "font",
+            "input": {
+              "type": "string",
+              "value": "高字标志圆"
+            }
+          },
+          {
+            "name": "font_size",
+            "input": {
+              "type": "string",
+              "value": "5"
+            }
+          },
+          {
+            "name": "scale_x",
+            "input": {
+              "type": "string",
+              "value": "1.5"
+            }
+          },
+          {
+            "name": "scale_y",
+            "input": {
+              "type": "string",
+              "value": "1.5"
+            }
+          },
+          {
+            "name": "texts",
+            "input": {
+              "value": {
+                "path": "Group1",
+                "ref_node": "139542"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "136490"
+              }
+            }
+          },
+          {
+            "name": "transform_y",
+            "input": {
+              "type": "string",
+              "value": "-800"
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null,
+            "description": "更新后的草稿URL"
+          },
+          "error": {
+            "type": "string",
+            "value": null,
+            "description": "错误信息，正常时为空"
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null,
+            "description": "片段ID列表"
+          },
+          "segment_infos": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "value": null,
+                  "description": "结束时间"
+                },
+                "id": {
+                  "type": "string",
+                  "value": null,
+                  "description": "片段ID"
+                },
+                "start": {
+                  "type": "integer",
+                  "value": null,
+                  "description": "开始时间"
+                }
+              },
+              "value": null
+            },
+            "value": null,
+            "description": "片段信息列表"
+          },
+          "text_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null,
+            "description": "文本ID列表"
+          },
+          "track_id": {
+            "type": "string",
+            "value": null,
+            "description": "轨道ID"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "199084",
+      "type": "plugin",
+      "title": "add_videos添加正文视频",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加视频 https://c1ga2vmd0f1.feishu.cn/wiki/X1nmwotXgiZcXvkA1e9czsJwnBh",
+      "position": {
+        "x": 13260,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599197535338534"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_videos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "186545"
+              }
+            }
+          },
+          {
+            "name": "scene_timelines",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "end": {
+                    "type": "float",
+                    "value": null
+                  },
+                  "merged_content": {
+                    "type": "string",
+                    "value": null
+                  },
+                  "shot_id": {
+                    "type": "string",
+                    "value": null
+                  },
+                  "start": {
+                    "type": "float",
+                    "value": null
+                  }
+                },
+                "value": null
+              },
+              "value": {
+                "path": "sceneTimeline",
+                "ref_node": "117064"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "end": {
+                    "type": "float",
+                    "value": null
+                  },
+                  "start": {
+                    "type": "float",
+                    "value": null
+                  }
+                },
+                "value": null
+              },
+              "value": {
+                "path": "timelines",
+                "ref_node": "112125"
+              }
+            }
+          },
+          {
+            "name": "video_urls",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "video_url_list",
+                "ref_node": "168591"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_infos": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "value": null
+                },
+                "id": {
+                  "type": "string",
+                  "value": null
+                },
+                "start": {
+                  "type": "integer",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "video_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "183054",
+      "type": "plugin",
+      "title": "add_audios添加正文音频",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加音频 https://c1ga2vmd0f1.feishu.cn/wiki/P1FOwskIAiRUxWk2PDncnwnGnje",
+      "position": {
+        "x": 18780,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976375817"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_audios"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "186545"
+              }
+            }
+          },
+          {
+            "name": "audio_effect",
+            "input": {
+              "type": "string",
+              "value": "人声增强3"
+            }
+          },
+          {
+            "name": "mp3_urls",
+            "input": {
+              "value": {
+                "path": "links",
+                "ref_node": "136490"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "136490"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "audio_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null,
+            "description": "音频ID列表"
+          },
+          "draft_url": {
+            "type": "string",
+            "value": null,
+            "description": "剪映草稿链接"
+          },
+          "error": {
+            "type": "string",
+            "value": null,
+            "description": "错误信息，正常时为空"
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "117064",
+      "type": "llm",
+      "title": "生成分镜提示词",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-LLM-v2.jpg",
+      "description": "调用大语言模型,使用变量和提示词生成回复",
+      "version": "3",
+      "position": {
+        "x": 4320,
+        "y": 423.6
+      },
+      "parameters": {
+        "fcParamVar": {
+          "knowledgeFCParam": {}
+        },
+        "llmParam": [
+          {
+            "name": "temperature",
+            "input": {
+              "type": "float",
+              "value": "0.3"
+            }
+          },
+          {
+            "name": "maxTokens",
+            "input": {
+              "type": "integer",
+              "value": "12288"
+            }
+          },
+          {
+            "name": "spCurrentTime",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "spAntiLeak",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "prefixCache",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "responseFormat",
+            "input": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "name": "modelName",
+            "input": {
+              "type": "string",
+              "value": "豆包·1.5·Pro·32k"
+            }
+          },
+          {
+            "name": "modelType",
+            "input": {
+              "type": "integer",
+              "value": "1737521813"
+            }
+          },
+          {
+            "name": "generationDiversity",
+            "input": {
+              "type": "string",
+              "value": "default_val"
+            }
+          },
+          {
+            "name": "parameters",
+            "input": {
+              "type": "object",
+              "value": null
+            }
+          },
+          {
+            "name": "prompt",
+            "input": {
+              "type": "string",
+              "value": "wenanTimeline：{{wenanTimeline}}"
+            }
+          },
+          {
+            "name": "enableChatHistory",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "chatHistoryRound",
+            "input": {
+              "type": "integer",
+              "value": "3"
+            }
+          },
+          {
+            "name": "systemPrompt",
+            "input": {
+              "type": "string",
+              "value": "# 角色\n你是一位顶级的AI短视频分镜总监，是节奏和叙事的掌控者。你深谙短视频的黄金法则：快节奏的开场、紧凑的主体和清晰的收尾。你的任务不是创造内容，而是对一份带有精确微秒时间码的文案脚本（`wenanTimeline`）进行专业的、符合传播规律的镜头切分，最终输出一份结构扁平、可直接用于后续工序的分镜清单。\n\n# 核心目标\n接收一个`wenanTimeline` JSON数组作为输入，输出一个全新的、结构扁平化的“分镜”JSON数组。输出的每个分镜对象必须且仅包含以下四个字段：\n- `shot_id` (字符串): 从 \"shot_01\" 开始的顺序编号。\n- `merged_content` (字符串): 该镜头内所有文案合并后的内容。\n- `start` (整数): 该镜头第一句文案的起始时间码（微秒）。\n- `end` (整数): 该镜头最后一句文案的结束时间码（微秒）。\n\n# 分镜心法（必须严格遵守的创作准则）\n\n1.  **黄金开局原则**: 短视频的开头必须一秒入魂。为了迅速抓住观众注意力，脚本的**前 `[4]` 句**文案，必须每一句都独立构成一个镜头，形成快速的视觉冲击。\n2.  **流畅叙事原则**: 视频主体部分需要保持信息的流动性，避免过于琐碎的频繁切换。因此，开局之后的所有文案，将以**每 `[3]` 到 `[5]` 句**为一组，合并成一个连贯的镜头。\n3.  **稳定收尾原则**: 结尾是情绪的落点，必须完整。在处理脚本末尾剩余的文案时，要以镜头的“完整性”为第一要务，坚决避免产生只有一两句话的“碎镜头”，确保观众获得完整的信息和情绪体验。\n\n# 执行方案（具体的算法步骤）\n\n### 可调参数\n-   `开场独立镜头数 [N]` = 4\n-   `主体镜头最小句数 [MIN_GROUP]` = 3\n-   `主体镜头最大句数 [MAX_GROUP]` = 5\n\n### 执行步骤\n1.  **第一阶段：快切开场**\n    -   处理输入数组的前 `[N]` 个对象。\n    -   为每个对象单独生成一个分镜，`merged_content` 就是其自身的 `content`。\n\n2.  **第二阶段：主体合并**\n    -   从第 `[N]+1` 个对象开始，处理剩余的文案。\n    -   尽可能地按照 `[MAX_GROUP]` 的数量（即5句）来创建镜头。\n\n3.  **边界处理是关键（体现专业性的地方）**\n    -   当你处理到最后，发现剩余的文案数量不足 `[MIN_GROUP]` + `[MAX_GROUP]` (即 3+5=8) 句时，你需要重新规划，以保证最后两个镜头的句子数量都尽可能均衡且不小于 `[MIN_GROUP]`。\n    -   **举例**:\n        -   若剩余7句，则分为一个4句的镜头和一个3句的镜头，**而不是**一个5句的镜头和一个2句的“碎镜头”。\n        -   若剩余6句，则分为两个3句的镜头。\n        -   若剩余5句或以下，则全部合并为最后一个镜头。\n\n4.  **全局规则**\n    -   `shot_id` 必须是连续递增的，并格式化为两位数（如 `shot_01`, `shot_09`, `shot_10`）。\n    -   合并 `merged_content` 时，在每句原文之间用“。”进行连接。\n\n# 严格限制\n-   绝对遵循输出的JSON格式，不得添加任何额外字段或解释性文字。\n-   `start` 和 `end` 的时间码必须是输入中的原始整数值，不得进行任何计算或修改。\n-   文案内容 `content` 不得做任何形式的修改、缩写或解释，只能原文拼接。\n-   分镜时不要丢失任何一句话\n\n# 拉片示例（输入/输出演示）\n\n--- 输入脚本 ---\n```json\n[\n    { \"content\": \"这是第一句话。\", \"start\": 0, \"end\": 2000000 },\n    { \"content\": \"这是第二句话。\", \"start\": 2000000, \"end\": 4000000 },\n    { \"content\": \"这是第三句话。\", \"start\": 4000000, \"end\": 6000000 },\n    { \"content\": \"这是第四句话。\", \"start\": 6000000, \"end\": 8000000 },\n    { \"content\": \"现在开始分组。\", \"start\": 8000000, \"end\": 10000000 },\n    { \"content\": \"这是第六句。\", \"start\": 10000000, \"end\": 12000000 },\n    { \"content\": \"这是第七句。\", \"start\": 12000000, \"end\": 14000000 },\n    { \"content\": \"这是第八句。\", \"start\": 14000000, \"end\": 16000000 },\n    { \"content\": \"这是第九句。\", \"start\": 16000000, \"end\": 18000000 },\n    { \"content\": \"还剩下三句。\", \"start\": 18000000, \"end\": 20000000 },\n    { \"content\": \"这是第十一句。\", \"start\": 20000000, \"end\": 22000000 },\n    { \"content\": \"最后一句。\", \"start\": 22000000, \"end\": 24000000 }\n]\n```"
+            }
+          },
+          {
+            "name": "stableSystemPrompt",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "canContinue",
+            "input": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          {
+            "name": "loopPromptVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "loopPromptName",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "loopPromptId",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "wenanTimeline",
+            "input": {
+              "value": {
+                "path": "wenanTimeline",
+                "ref_node": "121063"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "sceneTimeline": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "float",
+                  "value": null
+                },
+                "merged_content": {
+                  "type": "string",
+                  "value": null
+                },
+                "shot_id": {
+                  "type": "string",
+                  "value": null
+                },
+                "start": {
+                  "type": "float",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "switch": false,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "112125",
+      "type": "plugin",
+      "title": "timeline_generator生成时间线",
+      "icon": "https://p3-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ca01c8b6d78f4924a5aff57f034555ba~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "常用没有音频的情况，根据视频/文本/图片列表自动生成时间线，支持秒和帧两种单位，可配置平均时长或指定每个项目的具体时长，输出微秒级别的时间线数据。",
+      "position": {
+        "x": 11420,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7527296078274904073"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "timeline_generator"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7495336137377153039"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_速创小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "duration",
+            "input": {
+              "type": "string",
+              "value": "5"
+            }
+          },
+          {
+            "name": "items",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "video_url_list",
+                "ref_node": "168591"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "all_timeline": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "float",
+                  "value": null
+                },
+                "start": {
+                  "type": "float",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "items_timelines": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "value": null
+                },
+                "end": {
+                  "type": "float",
+                  "value": null
+                },
+                "start": {
+                  "type": "float",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "timelines": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "float",
+                  "value": null
+                },
+                "start": {
+                  "type": "float",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "150490",
+      "type": "plugin",
+      "title": "add_effects添加震动",
+      "icon": "https://p6-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "添加特效 https://c1ga2vmd0f1.feishu.cn/wiki/QaeBweQDZiTpgWkgXIPcAOkjnQh",
+      "position": {
+        "x": 14640,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599197535289382"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_effects"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "186545"
+              }
+            }
+          },
+          {
+            "name": "effects",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": "[\"震动\"]"
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "all_timelines",
+                "ref_node": "136490"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "effect_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1278366",
+      "type": "plugin",
+      "title": "add_effects添加噪点",
+      "icon": "https://p6-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/ce64ed975a76414086a09819232a472f~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "添加特效 https://c1ga2vmd0f1.feishu.cn/wiki/QaeBweQDZiTpgWkgXIPcAOkjnQh",
+      "position": {
+        "x": 16940,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7513599197535289382"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_effects"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7513599192976359433"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频速创_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "186545"
+              }
+            }
+          },
+          {
+            "name": "effects",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": "[\"荧幕噪点\"]"
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "all_timelines",
+                "ref_node": "136490"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "effect_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "100001",
+      "type": "start",
+      "title": "开始",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Start-v2.jpg",
+      "description": "工作流的起始节点，用于设定启动工作流需要的信息",
+      "position": {
+        "x": 180,
+        "y": 224.79999999999993
+      },
+      "parameters": {
+        "node_outputs": {
+          "subject": {
+            "type": "string",
+            "required": true,
+            "value": null,
+            "default_value": "斯多葛主义",
+            "description": "选题，例如：斯多葛主义"
+          },
+          "wenan": {
+            "type": "string",
+            "value": null,
+            "description": "自定义文案，不填写AI生成"
+          },
+          "yinse": {
+            "type": "voice",
+            "required": true,
+            "value": null,
+            "default_value": "7426720361733177353",
+            "description": "音色"
+          }
+        }
+      }
+    },
+    {
+      "id": "900001",
+      "type": "end",
+      "title": "结束",
+      "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-End-v2.jpg",
+      "description": "工作流的最终节点，用于返回工作流运行后的结果信息",
+      "position": {
+        "x": 20160,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "type": "string",
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          }
+        ],
+        "terminatePlan": "returnVariables"
+      }
+    },
+    {
+      "id": "122028",
+      "type": "plugin",
+      "title": "speech_synthesis",
+      "icon": "https://p3-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/0f335ed5bfcf4d7eac25b5b4d8499c96~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据音色和文本合成音频。按照字符数计费，计费项&免费额度说明：https://www.coze.cn/open/docs/coze_pro/asr_tts_fee。使用资源库音色时，计费项为复刻音色文字转语音字数；使用预设音色时，模型为大模型对应系统音色文字转语音字数，小模型对应小模型合成次数 。",
+      "position": {
+        "x": 2480,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7426655854067367946"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "speech_synthesis"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7426655854067351562"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "语音合成"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "batch": {
+          "batchEnable": true,
+          "batchSize": 100,
+          "concurrentSize": 10,
+          "inputLists": [
+            {
+              "name": "item1",
+              "input": {
+                "value": {
+                  "path": "Group1",
+                  "ref_node": "139542"
+                }
+              }
+            }
+          ]
+        },
+        "node_inputs": [
+          {
+            "name": "text",
+            "input": {
+              "type": "string",
+              "value": {
+                "path": "item1",
+                "ref_node": "122028"
+              }
+            }
+          },
+          {
+            "name": "speed_ratio",
+            "input": {
+              "type": "float",
+              "value": 1.1
+            }
+          },
+          {
+            "name": "voice_id",
+            "input": {
+              "value": {
+                "path": "yinse",
+                "ref_node": "100001"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "outputList": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "float",
+                  "value": null
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "duration": {
+                      "type": "float",
+                      "value": null,
+                      "description": "音频时长，单位是s"
+                    },
+                    "link": {
+                      "type": "string",
+                      "value": null
+                    }
+                  },
+                  "value": null
+                },
+                "log_id": {
+                  "type": "string",
+                  "value": null
+                },
+                "msg": {
+                  "type": "string",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "105280",
+      "type": "plugin",
+      "title": "create_draft",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/e7fbf0d1c75844ef8550bd9df5df7617~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "插件入口-创建草稿",
+      "position": {
+        "x": 8200,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7457837955684515874"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "create_draft"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "height",
+            "input": {
+              "type": "integer",
+              "value": 1080
+            }
+          },
+          {
+            "name": "width",
+            "input": {
+              "type": "integer",
+              "value": 1920
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "tip_url": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "171836",
+      "type": "plugin",
+      "title": "add_audios开场人声",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/e7fbf0d1c75844ef8550bd9df5df7617~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加音频",
+      "position": {
+        "x": 9580,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833834536"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_audios"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "audio_infos",
+            "input": {
+              "type": "string",
+              "value": {
+                "path": "infos",
+                "ref_node": "199111"
+              }
+            }
+          },
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "audio_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "199111",
+      "type": "plugin",
+      "title": "audio_infos开场人声",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/6d332ece10284d579e2461b0b6c0a60e~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据时间线制作音频数据",
+      "position": {
+        "x": 9120,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439158307"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "audio_infos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439109155"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "剪映小助手数据生成器"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "mp3_urls",
+            "input": {
+              "value": {
+                "path": "urls",
+                "ref_node": "137655"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "137655"
+              }
+            }
+          },
+          {
+            "name": "volume",
+            "input": {
+              "type": "float",
+              "value": 0.3
+            }
+          }
+        ],
+        "node_outputs": {
+          "infos": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1201245",
+      "type": "plugin",
+      "title": "add_audios开场人声_1",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/e7fbf0d1c75844ef8550bd9df5df7617~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加音频",
+      "position": {
+        "x": 10960,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833834536"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_audios"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "audio_infos",
+            "input": {
+              "type": "string",
+              "value": {
+                "path": "infos",
+                "ref_node": "1741338"
+              }
+            }
+          },
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "audio_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1741338",
+      "type": "plugin",
+      "title": "audio_infos开场人声_1",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/6d332ece10284d579e2461b0b6c0a60e~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据时间线制作音频数据",
+      "position": {
+        "x": 10500,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439158307"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "audio_infos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439109155"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "剪映小助手数据生成器"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "mp3_urls",
+            "input": {
+              "value": {
+                "path": "urls",
+                "ref_node": "1909183"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "1909183"
+              }
+            }
+          },
+          {
+            "name": "volume",
+            "input": {
+              "type": "float",
+              "value": 3
+            }
+          }
+        ],
+        "node_outputs": {
+          "infos": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1919687",
+      "type": "plugin",
+      "title": "imgs_infos开场背景图",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/6d332ece10284d579e2461b0b6c0a60e~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据时间线制作图片数据",
+      "position": {
+        "x": 12340,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439223843"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "imgs_infos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439109155"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "剪映小助手数据生成器"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "imgs",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "data_list",
+                "ref_node": "168591"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "sceneTimeline",
+                "ref_node": "117064"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "infos": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1616431",
+      "type": "plugin",
+      "title": "add_images开场背景图",
+      "icon": "https://p6-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/e7fbf0d1c75844ef8550bd9df5df7617~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加图片",
+      "position": {
+        "x": 12800,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833883688"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_images"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          },
+          {
+            "name": "image_infos",
+            "input": {
+              "value": {
+                "path": "infos",
+                "ref_node": "1919687"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "image_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_infos": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "value": null
+                },
+                "id": {
+                  "type": "string",
+                  "value": null
+                },
+                "start": {
+                  "type": "integer",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "106243",
+      "type": "plugin",
+      "title": "video_infos",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/6d332ece10284d579e2461b0b6c0a60e~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据时间线制作视频数据",
+      "position": {
+        "x": 13720,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7475829288541880360"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "video_infos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439109155"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "剪映小助手数据生成器"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "112125"
+              }
+            }
+          },
+          {
+            "name": "video_urls",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": {
+                "path": "video_url_list",
+                "ref_node": "168591"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "infos": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "148803",
+      "type": "plugin",
+      "title": "add_videos",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/e7fbf0d1c75844ef8550bd9df5df7617~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加视频",
+      "position": {
+        "x": 14180,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7457837955684499490"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_videos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          },
+          {
+            "name": "video_infos",
+            "input": {
+              "value": {
+                "path": "infos",
+                "ref_node": "106243"
+              }
+            }
+          },
+          {
+            "name": "scene_timelines",
+            "input": {
+              "value": {
+                "path": "sceneTimeline",
+                "ref_node": "117064"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_infos": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "value": null
+                },
+                "id": {
+                  "type": "string",
+                  "value": null
+                },
+                "start": {
+                  "type": "integer",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          },
+          "video_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "164226",
+      "type": "plugin",
+      "title": "effect_infos",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/6d332ece10284d579e2461b0b6c0a60e~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据时间线关联特效",
+      "position": {
+        "x": 14404.23164598714,
+        "y": 463.21209430716806
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7476312785018765321"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "effect_infos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439109155"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "剪映小助手数据生成器"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "effects",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": "[\"震动\"]"
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "all_timelines",
+                "ref_node": "136490"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "infos": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "149033",
+      "type": "plugin",
+      "title": "add_effects",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/81d5d69f8018495d9835356fa4744370~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "添加特效",
+      "position": {
+        "x": 10680,
+        "y": 301.79999999999995
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7466630948491231268"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_effects"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          },
+          {
+            "name": "effect_infos",
+            "input": {
+              "value": {
+                "path": "infos",
+                "ref_node": "164226"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "effect_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1180131",
+      "type": "plugin",
+      "title": "effect_infos_1",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/6d332ece10284d579e2461b0b6c0a60e~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据时间线关联特效",
+      "position": {
+        "x": 16020,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7476312785018765321"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "effect_infos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439109155"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "剪映小助手数据生成器"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "effects",
+            "input": {
+              "type": "list",
+              "items": {
+                "type": "string",
+                "value": null
+              },
+              "value": "[\"荧幕噪点\"]"
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "all_timelines",
+                "ref_node": "136490"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "infos": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1099852",
+      "type": "plugin",
+      "title": "add_effects_1",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/81d5d69f8018495d9835356fa4744370~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "添加特效",
+      "position": {
+        "x": 16480,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7466630948491231268"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_effects"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          },
+          {
+            "name": "effect_infos",
+            "input": {
+              "value": {
+                "path": "infos",
+                "ref_node": "1180131"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "effect_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1853227",
+      "type": "plugin",
+      "title": "caption_infos开场预选轨道",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/6d332ece10284d579e2461b0b6c0a60e~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据时间线制作字幕数据",
+      "position": {
+        "x": 17860,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439191075"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "caption_infos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439109155"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "剪映小助手数据生成器"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "texts",
+            "input": {
+              "value": {
+                "path": "Group1",
+                "ref_node": "139542"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "136490"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "infos": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1290600",
+      "type": "plugin",
+      "title": "add_captions开场预选轨道",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/e7fbf0d1c75844ef8550bd9df5df7617~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加字幕",
+      "position": {
+        "x": 18320,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833850920"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_captions"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "captions",
+            "input": {
+              "value": {
+                "path": "infos",
+                "ref_node": "1853227"
+              }
+            }
+          },
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          },
+          {
+            "name": "border_color",
+            "input": {
+              "type": "string",
+              "value": "#000000"
+            }
+          },
+          {
+            "name": "font",
+            "input": {
+              "type": "string",
+              "value": "高字标志圆"
+            }
+          },
+          {
+            "name": "font_size",
+            "input": {
+              "type": "integer",
+              "value": 5
+            }
+          },
+          {
+            "name": "scale_x",
+            "input": {
+              "type": "float",
+              "value": 1.5
+            }
+          },
+          {
+            "name": "scale_y",
+            "input": {
+              "type": "float",
+              "value": 1.5
+            }
+          },
+          {
+            "name": "text_color",
+            "input": {
+              "type": "string",
+              "value": "#FFFFFF"
+            }
+          },
+          {
+            "name": "transform_y",
+            "input": {
+              "type": "float",
+              "value": -800
+            }
+          }
+        ],
+        "node_outputs": {
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "segment_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "segment_infos": {
+            "type": "list",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "integer",
+                  "value": null
+                },
+                "id": {
+                  "type": "string",
+                  "value": null
+                },
+                "start": {
+                  "type": "integer",
+                  "value": null
+                }
+              },
+              "value": null
+            },
+            "value": null
+          },
+          "text_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1488114",
+      "type": "plugin",
+      "title": "add_audios开场人声_2",
+      "icon": "https://p9-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/e7fbf0d1c75844ef8550bd9df5df7617~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "批量添加音频",
+      "position": {
+        "x": 19700,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833834536"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "add_audios"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7457837925833801768"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "视频合成_剪映小助手"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "audio_infos",
+            "input": {
+              "type": "string",
+              "value": {
+                "path": "infos",
+                "ref_node": "1381849"
+              }
+            }
+          },
+          {
+            "name": "draft_url",
+            "input": {
+              "value": {
+                "path": "draft_url",
+                "ref_node": "105280"
+              }
+            }
+          }
+        ],
+        "node_outputs": {
+          "audio_ids": {
+            "type": "list",
+            "items": {
+              "type": "string",
+              "value": null
+            },
+            "value": null
+          },
+          "draft_url": {
+            "type": "string",
+            "value": null
+          },
+          "track_id": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    },
+    {
+      "id": "1381849",
+      "type": "plugin",
+      "title": "audio_infos开场人声_2",
+      "icon": "https://p26-flow-product-sign.byteimg.com/tos-cn-i-13w3uml6bg/6d332ece10284d579e2461b0b6c0a60e~tplv-13w3uml6bg-resize:128:128.image",
+      "description": "根据时间线制作音频数据",
+      "position": {
+        "x": 19240,
+        "y": 211.79999999999993
+      },
+      "parameters": {
+        "apiParam": [
+          {
+            "name": "apiID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439158307"
+            }
+          },
+          {
+            "name": "apiName",
+            "input": {
+              "type": "string",
+              "value": "audio_infos"
+            }
+          },
+          {
+            "name": "pluginID",
+            "input": {
+              "type": "string",
+              "value": "7475829177439109155"
+            }
+          },
+          {
+            "name": "pluginName",
+            "input": {
+              "type": "string",
+              "value": "剪映小助手数据生成器"
+            }
+          },
+          {
+            "name": "pluginVersion",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "tips",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          },
+          {
+            "name": "outDocLink",
+            "input": {
+              "type": "string",
+              "value": ""
+            }
+          }
+        ],
+        "node_inputs": [
+          {
+            "name": "mp3_urls",
+            "input": {
+              "value": {
+                "path": "links",
+                "ref_node": "136490"
+              }
+            }
+          },
+          {
+            "name": "timelines",
+            "input": {
+              "value": {
+                "path": "timelines",
+                "ref_node": "136490"
+              }
+            }
+          },
+          {
+            "name": "audio_effect",
+            "input": {
+              "type": "string",
+              "value": "人声增强3"
+            }
+          }
+        ],
+        "node_outputs": {
+          "infos": {
+            "type": "string",
+            "value": null
+          }
+        },
+        "settingOnError": {
+          "processType": 1,
+          "retryTimes": 0,
+          "timeoutMs": 180000
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source_node": "138522",
+      "target_node": "180546",
+      "source_port": "true"
+    },
+    {
+      "source_node": "180546",
+      "target_node": "1773492"
+    },
+    {
+      "source_node": "100001",
+      "target_node": "138522"
+    },
+    {
+      "source_node": "138522",
+      "target_node": "139031",
+      "source_port": "false"
+    },
+    {
+      "source_node": "139031",
+      "target_node": "139542"
+    },
+    {
+      "source_node": "1773492",
+      "target_node": "139542"
+    },
+    {
+      "source_node": "139542",
+      "target_node": "122028"
+    },
+    {
+      "source_node": "159936",
+      "target_node": "136490"
+    },
+    {
+      "source_node": "136490",
+      "target_node": "154178"
+    },
+    {
+      "source_node": "136490",
+      "target_node": "1041638"
+    },
+    {
+      "source_node": "136490",
+      "target_node": "121063"
+    },
+    {
+      "source_node": "122028",
+      "target_node": "159936"
+    },
+    {
+      "source_node": "168059",
+      "target_node": "168591"
+    },
+    {
+      "source_node": "168591",
+      "target_node": "186545",
+      "source_port": "batch-output"
+    },
+    {
+      "source_node": "121063",
+      "target_node": "117064"
+    },
+    {
+      "source_node": "117064",
+      "target_node": "168059"
+    },
+    {
+      "source_node": "137655",
+      "target_node": "186545"
+    },
+    {
+      "source_node": "1909183",
+      "target_node": "186545"
+    },
+    {
+      "source_node": "186545",
+      "target_node": "105280"
+    },
+    {
+      "source_node": "1041638",
+      "target_node": "137655"
+    },
+    {
+      "source_node": "105280",
+      "target_node": "145750"
+    },
+    {
+      "source_node": "145750",
+      "target_node": "199111"
+    },
+    {
+      "source_node": "154178",
+      "target_node": "1909183"
+    },
+    {
+      "source_node": "171836",
+      "target_node": "1466353"
+    },
+    {
+      "source_node": "1466353",
+      "target_node": "1741338"
+    },
+    {
+      "source_node": "112125",
+      "target_node": "125474"
+    },
+    {
+      "source_node": "125474",
+      "target_node": "1919687"
+    },
+    {
+      "source_node": "1278366",
+      "target_node": "138196"
+    },
+    {
+      "source_node": "138196",
+      "target_node": "1853227"
+    },
+    {
+      "source_node": "1616431",
+      "target_node": "199084"
+    },
+    {
+      "source_node": "199084",
+      "target_node": "106243"
+    },
+    {
+      "source_node": "1290600",
+      "target_node": "183054"
+    },
+    {
+      "source_node": "183054",
+      "target_node": "1381849"
+    },
+    {
+      "source_node": "1201245",
+      "target_node": "112125"
+    },
+    {
+      "source_node": "148803",
+      "target_node": "150490"
+    },
+    {
+      "source_node": "150490",
+      "target_node": "164226"
+    },
+    {
+      "source_node": "1099852",
+      "target_node": "1278366"
+    },
+    {
+      "source_node": "1488114",
+      "target_node": "900001"
+    },
+    {
+      "source_node": "199111",
+      "target_node": "171836"
+    },
+    {
+      "source_node": "1741338",
+      "target_node": "1201245"
+    },
+    {
+      "source_node": "1919687",
+      "target_node": "1616431"
+    },
+    {
+      "source_node": "106243",
+      "target_node": "148803"
+    },
+    {
+      "source_node": "164226",
+      "target_node": "149033"
+    },
+    {
+      "source_node": "149033",
+      "target_node": "1180131"
+    },
+    {
+      "source_node": "1180131",
+      "target_node": "1099852"
+    },
+    {
+      "source_node": "1853227",
+      "target_node": "1290600"
+    },
+    {
+      "source_node": "1381849",
+      "target_node": "1488114"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+sqlalchemy==2.0.36
+pydantic-settings==2.7.1
+httpx[socks]==0.28.1
+aiofiles==24.1.0
+python-multipart==0.0.20
+pyjianyingdraft==0.3.0
+# 用来检测生成的图有没有违反画风的"必须黑白"约束（见 services/image_guard.py）
+pillow==12.3.0
+imageio-ffmpeg==0.6.0
+PyYAML==6.0.3

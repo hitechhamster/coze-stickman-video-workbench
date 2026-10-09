@@ -1,0 +1,5 @@
+* text=auto
+
+# 批处理文件必须是 CRLF，否则 Windows 下 goto/label 会解析失败
+*.bat text eol=crlf
+*.cmd text eol=crlf

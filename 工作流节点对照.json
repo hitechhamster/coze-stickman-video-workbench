@@ -1,0 +1,828 @@
+{
+  "source_sha256": "6e88ce584bbd3c8e4cf16156692b4cf9f961b949cf69dc4c30944b99ddb67923",
+  "node_count": 50,
+  "nodes": [
+    {
+      "id": "180546",
+      "title": "AI生成口播稿",
+      "type": "llm",
+      "status": "original_prompt",
+      "implementation": "coze_providers.complete",
+      "note": "原文案提示词、温度0.3和12288令牌；模型通过配置绑定。",
+      "source_inputs": {
+        "subject": {
+          "path": "subject",
+          "ref_node": "100001"
+        }
+      }
+    },
+    {
+      "id": "138522",
+      "title": "是否输入自己的文案",
+      "type": "condition",
+      "status": "local_branch",
+      "implementation": "coze_pipeline.run_coze_generation",
+      "note": "手动文案与AI选题分支。",
+      "source_inputs": {}
+    },
+    {
+      "id": "139542",
+      "title": "正文文案变量聚合",
+      "type": "variable_merge",
+      "status": "local_merge",
+      "implementation": "coze_pipeline.run_coze_generation",
+      "note": "两条文案分支合并为正文。",
+      "source_inputs": {}
+    },
+    {
+      "id": "139031",
+      "title": "口播稿智能分割text_splitter",
+      "type": "plugin",
+      "status": "opaque_plugin_replacement",
+      "implementation": "coze_profile.split_text",
+      "note": "按标点清洗分段；插件源码未导出。",
+      "source_inputs": {
+        "text": {
+          "path": "wenan",
+          "ref_node": "100001"
+        }
+      }
+    },
+    {
+      "id": "1773492",
+      "title": "AI口播稿智能分割text_splitter",
+      "type": "plugin",
+      "status": "opaque_plugin_replacement",
+      "implementation": "coze_profile.split_text",
+      "note": "与自定义文案使用同一清洗分段实现。",
+      "source_inputs": {
+        "text": {
+          "path": "wenan",
+          "ref_node": "180546"
+        }
+      }
+    },
+    {
+      "id": "136490",
+      "title": "提取正文音频时间线audio_timelines",
+      "type": "plugin",
+      "status": "opaque_plugin_replacement",
+      "implementation": "coze_audio.normalize_audio / append_pause",
+      "note": "首尾静音裁剪、0.15秒段间停顿、采样数实测微秒时长。去呼吸不保证与封闭插件相同。",
+      "source_inputs": {
+        "links": {
+          "path": "links",
+          "ref_node": "159936"
+        },
+        "silence_duration": 0.15,
+        "trim_breath": 1
+      }
+    },
+    {
+      "id": "159936",
+      "title": "提取正文语音URL为列表audio_link_collector",
+      "type": "plugin",
+      "status": "local_validation",
+      "implementation": "coze_pipeline.voice_worker",
+      "note": "检查每段音频，不将null传入下游；错误定位到段号。",
+      "source_inputs": {
+        "outputList": {
+          "path": "outputList",
+          "ref_node": "122028"
+        }
+      }
+    },
+    {
+      "id": "168591",
+      "title": "批量生成正文视频",
+      "type": "batch",
+      "status": "local_batch",
+      "implementation": "coze_pipeline._bounded",
+      "note": "生图并发3；批量上限100；输入为合镜后的分镜。",
+      "source_inputs": {
+        "imgsTimeline": {
+          "path": "outputList",
+          "ref_node": "168059"
+        }
+      }
+    },
+    {
+      "id": "155753",
+      "title": "图像生成",
+      "type": "image_generate",
+      "status": "original_prompt",
+      "implementation": "coze_providers.generate_image",
+      "note": "保留角色附加词和负向词；1920x1080；Coze内部模型编号10需配置厂商模型。",
+      "source_inputs": {
+        "img_prompt": {
+          "path": "imgsTimeline.img_prompt",
+          "ref_node": "168591"
+        }
+      }
+    },
+    {
+      "id": "152234",
+      "title": "sd_better_prompt",
+      "type": "plugin",
+      "status": "opaque_plugin_replacement",
+      "implementation": "coze_pipeline.image_worker",
+      "note": "失败时由文本模型优化提示词；原优化插件源码未导出。",
+      "source_inputs": {
+        "prompt": {
+          "path": "imgsTimeline.img_prompt",
+          "ref_node": "168591"
+        }
+      }
+    },
+    {
+      "id": "192618",
+      "title": "选择器",
+      "type": "condition",
+      "status": "local_branch",
+      "implementation": "coze_pipeline.image_worker",
+      "note": "生图失败分支触发优化并重试。",
+      "source_inputs": {}
+    },
+    {
+      "id": "129292",
+      "title": "变量聚合",
+      "type": "variable_merge",
+      "status": "local_merge",
+      "implementation": "coze_pipeline.image_worker",
+      "note": "选取成功配图；两条原来源都是image类型。",
+      "source_inputs": {}
+    },
+    {
+      "id": "1175150",
+      "title": "图像生成_1",
+      "type": "image_generate",
+      "status": "original_prompt",
+      "implementation": "coze_providers.generate_image",
+      "note": "优化后使用同一生图配置重试。",
+      "source_inputs": {
+        "img_prompt": {
+          "path": "data",
+          "ref_node": "152234"
+        }
+      }
+    },
+    {
+      "id": "121063",
+      "title": "文案合并时间线wenan_timeline_range_merge",
+      "type": "plugin",
+      "status": "local_merge",
+      "implementation": "coze_profile.sentence_timeline",
+      "note": "完整保留正文顺序，将文案与实测音频逐条配对。",
+      "source_inputs": {
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "136490"
+        },
+        "wenan": {
+          "path": "Group1",
+          "ref_node": "139542"
+        }
+      }
+    },
+    {
+      "id": "168059",
+      "title": "生成配图/视频提示词",
+      "type": "llm",
+      "status": "original_prompt",
+      "implementation": "coze_providers.complete",
+      "note": "保留完整水彩火柴人提示词、温度0.8和12288令牌；并发10。",
+      "source_inputs": {
+        "content": {
+          "path": "item1.merged_content",
+          "ref_node": "168059"
+        }
+      }
+    },
+    {
+      "id": "186545",
+      "title": "create_draft创建剪映草稿",
+      "type": "plugin",
+      "status": "redundant_draft_chain",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "原最终输出不引用第一套草稿；本地避免重复写两套。",
+      "source_inputs": {}
+    },
+    {
+      "id": "1041638",
+      "title": "上传背景音乐BGM",
+      "type": "text",
+      "status": "original_asset",
+      "implementation": "backend/workflow-assets/bgm-original.mp3",
+      "note": "原音频已缓存，不依赖签名链接持续有效。",
+      "source_inputs": {
+        "String1": "https://p9-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/726db00d153d4d7fb9df47958775a7c8.MP3~tplv-mdko3gqilj-image.image"
+      }
+    },
+    {
+      "id": "137655",
+      "title": "media_tile背景音乐铺满时间线",
+      "type": "plugin",
+      "status": "local_timeline",
+      "implementation": "coze_draft.tile_audio",
+      "note": "按素材时长循环铺满正文总时间线。",
+      "source_inputs": {
+        "all_timeline": {
+          "path": "all_timelines",
+          "ref_node": "136490"
+        },
+        "media_url": {
+          "path": "output",
+          "ref_node": "1041638"
+        }
+      }
+    },
+    {
+      "id": "145750",
+      "title": "add_audios添加背景音乐",
+      "type": "plugin",
+      "status": "original_audio",
+      "implementation": "coze_draft.tile_audio",
+      "note": "最终一套草稿的背景音乐轨道，音量0.3。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "186545"
+        },
+        "mp3_urls": {
+          "path": "urls",
+          "ref_node": "137655"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "137655"
+        },
+        "volume": 0.3
+      }
+    },
+    {
+      "id": "154178",
+      "title": "鼠标点击音效",
+      "type": "text",
+      "status": "original_asset",
+      "implementation": "backend/workflow-assets/click-original.mp3",
+      "note": "原点击音效已缓存。",
+      "source_inputs": {
+        "String1": "https://p3-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/33545bb4372e4234ae1136f3800b866e.MP3~tplv-mdko3gqilj-image.image"
+      }
+    },
+    {
+      "id": "1466353",
+      "title": "add_audios添加鼠标点击音效",
+      "type": "plugin",
+      "status": "original_audio",
+      "implementation": "coze_draft.tile_audio",
+      "note": "最终一套草稿的开头点击音效轨道，音量3。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "186545"
+        },
+        "mp3_urls": {
+          "path": "urls",
+          "ref_node": "1909183"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "1909183"
+        },
+        "volume": 3
+      }
+    },
+    {
+      "id": "1909183",
+      "title": "media_tile鼠标点击音效",
+      "type": "plugin",
+      "status": "original_timeline",
+      "implementation": "coze_draft.tile_audio",
+      "note": "点击音效区间0至391833微秒，未扩展到所有切镜。",
+      "source_inputs": {
+        "all_timeline": "[{\"start\": 0, \"end\": 391833}]",
+        "media_url": {
+          "path": "output",
+          "ref_node": "154178"
+        }
+      }
+    },
+    {
+      "id": "125474",
+      "title": "add_images添加正文配图",
+      "type": "plugin",
+      "status": "original_image_timeline",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "按sceneTimeline放置配图；未加入原流程未指定的推拉。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "186545"
+        },
+        "imgs": {
+          "path": "data_list",
+          "ref_node": "168591"
+        },
+        "timelines": {
+          "path": "sceneTimeline",
+          "ref_node": "117064"
+        }
+      }
+    },
+    {
+      "id": "138196",
+      "title": "add_captions添加正文字幕",
+      "type": "plugin",
+      "status": "original_caption_parameters",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "逐句字幕参数保留；Y=-800按千分坐标暂映射-0.8，需校准。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "186545"
+        },
+        "border_color": "#000000",
+        "font": "高字标志圆",
+        "font_size": "5",
+        "scale_x": "1.5",
+        "scale_y": "1.5",
+        "texts": {
+          "path": "Group1",
+          "ref_node": "139542"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "136490"
+        },
+        "transform_y": "-800"
+      }
+    },
+    {
+      "id": "199084",
+      "title": "add_videos添加正文视频",
+      "type": "plugin",
+      "status": "source_type_correction",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "原video_url_list实际为图片；使用图片素材轨道覆盖sceneTimeline，未伪造5秒视频。原video_prompt保存在清单。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "186545"
+        },
+        "scene_timelines": {
+          "path": "sceneTimeline",
+          "ref_node": "117064"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "112125"
+        },
+        "video_urls": {
+          "path": "video_url_list",
+          "ref_node": "168591"
+        }
+      }
+    },
+    {
+      "id": "183054",
+      "title": "add_audios添加正文音频",
+      "type": "plugin",
+      "status": "original_audio_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "正文逐段音频、人声增强3；名称开场人声实际引用全正文。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "186545"
+        },
+        "audio_effect": "人声增强3",
+        "mp3_urls": {
+          "path": "links",
+          "ref_node": "136490"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "136490"
+        }
+      }
+    },
+    {
+      "id": "117064",
+      "title": "生成分镜提示词",
+      "type": "llm",
+      "status": "original_algorithm",
+      "implementation": "coze_profile.group_shots",
+      "note": "按原系统提示词中N4/MIN3/MAX5算法本地合镜；不让模型改时间码。",
+      "source_inputs": {
+        "wenanTimeline": {
+          "path": "wenanTimeline",
+          "ref_node": "121063"
+        }
+      }
+    },
+    {
+      "id": "112125",
+      "title": "timeline_generator生成时间线",
+      "type": "plugin",
+      "status": "source_type_correction",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "原video_url_list实际为图片；使用图片素材轨道覆盖sceneTimeline，未伪造5秒视频。原video_prompt保存在清单。",
+      "source_inputs": {
+        "duration": "5",
+        "items": {
+          "path": "video_url_list",
+          "ref_node": "168591"
+        }
+      }
+    },
+    {
+      "id": "150490",
+      "title": "add_effects添加震动",
+      "type": "plugin",
+      "status": "original_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "全时间线震动特效，原文件未指定强度。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "186545"
+        },
+        "effects": "[\"震动\"]",
+        "timelines": {
+          "path": "all_timelines",
+          "ref_node": "136490"
+        }
+      }
+    },
+    {
+      "id": "1278366",
+      "title": "add_effects添加噪点",
+      "type": "plugin",
+      "status": "original_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "全时间线荧幕噪点，原文件未指定强度。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "186545"
+        },
+        "effects": "[\"荧幕噪点\"]",
+        "timelines": {
+          "path": "all_timelines",
+          "ref_node": "136490"
+        }
+      }
+    },
+    {
+      "id": "100001",
+      "title": "开始",
+      "type": "start",
+      "status": "local_inputs",
+      "implementation": "workflow.create_workflow_project",
+      "note": "选题、可选文案、音色输入。",
+      "source_inputs": {}
+    },
+    {
+      "id": "900001",
+      "title": "结束",
+      "type": "end",
+      "status": "local_output",
+      "implementation": "projects.get_project_draft",
+      "note": "返回本地草稿名称与草稿位置。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        }
+      }
+    },
+    {
+      "id": "122028",
+      "title": "speech_synthesis",
+      "type": "plugin",
+      "status": "provider_binding",
+      "implementation": "coze_providers.synthesize / coze_audio.normalize_audio",
+      "note": "逐段配音、并发10、1.1倍速；Coze数字音色ID不能直接传厂商。",
+      "source_inputs": {
+        "text": {
+          "path": "item1",
+          "ref_node": "122028"
+        },
+        "speed_ratio": 1.1,
+        "voice_id": {
+          "path": "yinse",
+          "ref_node": "100001"
+        }
+      }
+    },
+    {
+      "id": "105280",
+      "title": "create_draft",
+      "type": "plugin",
+      "status": "local_draft",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "最终返回的第二套草稿链路；1920x1080。",
+      "source_inputs": {
+        "height": 1080,
+        "width": 1920
+      }
+    },
+    {
+      "id": "171836",
+      "title": "add_audios开场人声",
+      "type": "plugin",
+      "status": "original_audio",
+      "implementation": "coze_draft.tile_audio",
+      "note": "最终一套草稿的背景音乐轨道，音量0.3。",
+      "source_inputs": {
+        "audio_infos": {
+          "path": "infos",
+          "ref_node": "199111"
+        },
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        }
+      }
+    },
+    {
+      "id": "199111",
+      "title": "audio_infos开场人声",
+      "type": "plugin",
+      "status": "original_audio",
+      "implementation": "coze_draft.tile_audio",
+      "note": "最终一套草稿的背景音乐轨道，音量0.3。",
+      "source_inputs": {
+        "mp3_urls": {
+          "path": "urls",
+          "ref_node": "137655"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "137655"
+        },
+        "volume": 0.3
+      }
+    },
+    {
+      "id": "1201245",
+      "title": "add_audios开场人声_1",
+      "type": "plugin",
+      "status": "original_audio",
+      "implementation": "coze_draft.tile_audio",
+      "note": "最终一套草稿的开头点击音效轨道，音量3。",
+      "source_inputs": {
+        "audio_infos": {
+          "path": "infos",
+          "ref_node": "1741338"
+        },
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        }
+      }
+    },
+    {
+      "id": "1741338",
+      "title": "audio_infos开场人声_1",
+      "type": "plugin",
+      "status": "original_audio",
+      "implementation": "coze_draft.tile_audio",
+      "note": "最终一套草稿的开头点击音效轨道，音量3。",
+      "source_inputs": {
+        "mp3_urls": {
+          "path": "urls",
+          "ref_node": "1909183"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "1909183"
+        },
+        "volume": 3
+      }
+    },
+    {
+      "id": "1919687",
+      "title": "imgs_infos开场背景图",
+      "type": "plugin",
+      "status": "original_image_timeline",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "按sceneTimeline放置配图；未加入原流程未指定的推拉。",
+      "source_inputs": {
+        "imgs": {
+          "path": "data_list",
+          "ref_node": "168591"
+        },
+        "timelines": {
+          "path": "sceneTimeline",
+          "ref_node": "117064"
+        }
+      }
+    },
+    {
+      "id": "1616431",
+      "title": "add_images开场背景图",
+      "type": "plugin",
+      "status": "original_image_timeline",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "按sceneTimeline放置配图；未加入原流程未指定的推拉。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        },
+        "image_infos": {
+          "path": "infos",
+          "ref_node": "1919687"
+        }
+      }
+    },
+    {
+      "id": "106243",
+      "title": "video_infos",
+      "type": "plugin",
+      "status": "source_type_correction",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "原video_url_list实际为图片；使用图片素材轨道覆盖sceneTimeline，未伪造5秒视频。原video_prompt保存在清单。",
+      "source_inputs": {
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "112125"
+        },
+        "video_urls": {
+          "path": "video_url_list",
+          "ref_node": "168591"
+        }
+      }
+    },
+    {
+      "id": "148803",
+      "title": "add_videos",
+      "type": "plugin",
+      "status": "source_type_correction",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "原video_url_list实际为图片；使用图片素材轨道覆盖sceneTimeline，未伪造5秒视频。原video_prompt保存在清单。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        },
+        "video_infos": {
+          "path": "infos",
+          "ref_node": "106243"
+        },
+        "scene_timelines": {
+          "path": "sceneTimeline",
+          "ref_node": "117064"
+        }
+      }
+    },
+    {
+      "id": "164226",
+      "title": "effect_infos",
+      "type": "plugin",
+      "status": "original_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "全时间线震动特效，原文件未指定强度。",
+      "source_inputs": {
+        "effects": "[\"震动\"]",
+        "timelines": {
+          "path": "all_timelines",
+          "ref_node": "136490"
+        }
+      }
+    },
+    {
+      "id": "149033",
+      "title": "add_effects",
+      "type": "plugin",
+      "status": "original_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "全时间线震动特效，原文件未指定强度。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        },
+        "effect_infos": {
+          "path": "infos",
+          "ref_node": "164226"
+        }
+      }
+    },
+    {
+      "id": "1180131",
+      "title": "effect_infos_1",
+      "type": "plugin",
+      "status": "original_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "全时间线荧幕噪点，原文件未指定强度。",
+      "source_inputs": {
+        "effects": "[\"荧幕噪点\"]",
+        "timelines": {
+          "path": "all_timelines",
+          "ref_node": "136490"
+        }
+      }
+    },
+    {
+      "id": "1099852",
+      "title": "add_effects_1",
+      "type": "plugin",
+      "status": "original_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "全时间线荧幕噪点，原文件未指定强度。",
+      "source_inputs": {
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        },
+        "effect_infos": {
+          "path": "infos",
+          "ref_node": "1180131"
+        }
+      }
+    },
+    {
+      "id": "1853227",
+      "title": "caption_infos开场预选轨道",
+      "type": "plugin",
+      "status": "original_caption_parameters",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "逐句字幕参数保留；Y=-800按千分坐标暂映射-0.8，需校准。",
+      "source_inputs": {
+        "texts": {
+          "path": "Group1",
+          "ref_node": "139542"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "136490"
+        }
+      }
+    },
+    {
+      "id": "1290600",
+      "title": "add_captions开场预选轨道",
+      "type": "plugin",
+      "status": "original_caption_parameters",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "逐句字幕参数保留；Y=-800按千分坐标暂映射-0.8，需校准。",
+      "source_inputs": {
+        "captions": {
+          "path": "infos",
+          "ref_node": "1853227"
+        },
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        },
+        "border_color": "#000000",
+        "font": "高字标志圆",
+        "font_size": 5,
+        "scale_x": 1.5,
+        "scale_y": 1.5,
+        "text_color": "#FFFFFF",
+        "transform_y": -800
+      }
+    },
+    {
+      "id": "1488114",
+      "title": "add_audios开场人声_2",
+      "type": "plugin",
+      "status": "original_audio_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "正文逐段音频、人声增强3；名称开场人声实际引用全正文。",
+      "source_inputs": {
+        "audio_infos": {
+          "path": "infos",
+          "ref_node": "1381849"
+        },
+        "draft_url": {
+          "path": "draft_url",
+          "ref_node": "105280"
+        }
+      }
+    },
+    {
+      "id": "1381849",
+      "title": "audio_infos开场人声_2",
+      "type": "plugin",
+      "status": "original_audio_effect",
+      "implementation": "coze_draft.build_coze_draft",
+      "note": "正文逐段音频、人声增强3；名称开场人声实际引用全正文。",
+      "source_inputs": {
+        "mp3_urls": {
+          "path": "links",
+          "ref_node": "136490"
+        },
+        "timelines": {
+          "path": "timelines",
+          "ref_node": "136490"
+        },
+        "audio_effect": "人声增强3"
+      }
+    }
+  ]
+}
